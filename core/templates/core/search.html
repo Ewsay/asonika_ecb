@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Search Page
+{% endblock %}
+
+{% block content %}
+<h1>Страница поиска по всем деталям</h1>
+
+<form action="{% url 'search_results' %}" method="get">
+    <i>На данный момент поиск работает только по одному полю!</i>
+    <br><br>
+    <input name="q" type="text" placeholder="Номер детали">
+    <br><br>
+    <input name="qm" type="text" placeholder="Номер производителя">
+    <br><br>
+    <button>Поиск</button>
+</form>
+{% endblock %}

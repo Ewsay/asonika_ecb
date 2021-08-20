@@ -1,0 +1,3025 @@
+{
+  "columns": [
+    {
+      "$type": "DataProvider.Serialize.ColumnSelective, DataProvider",
+      "Values": [
+        {
+          "Id": 2,
+          "Name": "Нет",
+          "Description": null
+        }
+      ],
+      "Id": 2,
+      "Name": "Отли-читель-ный знак А",
+      "Short": "Отли-читель-ный знак А",
+      "Width": 98.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnSelective, DataProvider",
+      "Values": [
+        {
+          "Id": 2,
+          "Name": "Нет",
+          "Description": null
+        }
+      ],
+      "Id": 3,
+      "Name": "Отли-читель-ный знак Г",
+      "Short": "Отли-читель-ный знак Г",
+      "Width": 97.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnSelective, DataProvider",
+      "Values": [
+        {
+          "Id": 40,
+          "Name": "401.14-3",
+          "Description": null
+        },
+        {
+          "Id": 43,
+          "Name": "401.14-5",
+          "Description": null
+        },
+        {
+          "Id": 45,
+          "Name": "401.14-5.08",
+          "Description": null
+        },
+        {
+          "Id": 50,
+          "Name": "401.14-5НБ",
+          "Description": null
+        },
+        {
+          "Id": 44,
+          "Name": "401.14-5.07НБ",
+          "Description": null
+        },
+        {
+          "Id": 118,
+          "Name": "4105.14-16.01",
+          "Description": null
+        }
+      ],
+      "Id": 204,
+      "Name": "Тип корпуса",
+      "Short": "Тип корпуса",
+      "Width": 67.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnNumeric, DataProvider",
+      "Units": [
+        {
+          "Name": "p",
+          "Multiplier": 1E-12,
+          "MinValue": 0.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-09,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "n",
+          "Multiplier": 1E-09,
+          "MinValue": 1E-09,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-06,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "u",
+          "Multiplier": 1E-06,
+          "MinValue": 1E-06,
+          "MinIsIncluded": true,
+          "MaxValue": 0.001,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "m",
+          "Multiplier": 0.001,
+          "MinValue": 0.001,
+          "MinIsIncluded": true,
+          "MaxValue": 0.1,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "",
+          "Multiplier": 1.0,
+          "MinValue": 0.1,
+          "MinIsIncluded": true,
+          "MaxValue": 1000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "k",
+          "Multiplier": 1000.0,
+          "MinValue": 1000.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1000000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "M",
+          "Multiplier": 1000000.0,
+          "MinValue": 1000000.0,
+          "MinIsIncluded": true,
+          "MaxValue": "Infinity",
+          "MaxIsIncluded": true
+        }
+      ],
+      "DefaultMultiplier": 1E-12,
+      "IntegerOnlyValues": false,
+      "Id": 205,
+      "Name": "Напряжение питания, В",
+      "Short": "Напряжение питания, В",
+      "Width": 80.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnNumeric, DataProvider",
+      "Units": [
+        {
+          "Name": "p",
+          "Multiplier": 1E-12,
+          "MinValue": 0.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-09,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "n",
+          "Multiplier": 1E-09,
+          "MinValue": 1E-09,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-06,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "u",
+          "Multiplier": 1E-06,
+          "MinValue": 1E-06,
+          "MinIsIncluded": true,
+          "MaxValue": 0.001,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "m",
+          "Multiplier": 0.001,
+          "MinValue": 0.001,
+          "MinIsIncluded": true,
+          "MaxValue": 0.1,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "",
+          "Multiplier": 1.0,
+          "MinValue": 0.1,
+          "MinIsIncluded": true,
+          "MaxValue": 1000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "k",
+          "Multiplier": 1000.0,
+          "MinValue": 1000.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1000000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "M",
+          "Multiplier": 1000000.0,
+          "MinValue": 1000000.0,
+          "MinIsIncluded": true,
+          "MaxValue": "Infinity",
+          "MaxIsIncluded": true
+        }
+      ],
+      "DefaultMultiplier": 1000.0,
+      "IntegerOnlyValues": false,
+      "Id": 226,
+      "Name": "Ток потребления (loc), мА, не более",
+      "Short": "Ток потребления (loc), мА, не более",
+      "Width": 76.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnNumeric, DataProvider",
+      "Units": [
+        {
+          "Name": "p",
+          "Multiplier": 1E-12,
+          "MinValue": 0.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-09,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "n",
+          "Multiplier": 1E-09,
+          "MinValue": 1E-09,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-06,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "u",
+          "Multiplier": 1E-06,
+          "MinValue": 1E-06,
+          "MinIsIncluded": true,
+          "MaxValue": 0.001,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "m",
+          "Multiplier": 0.001,
+          "MinValue": 0.001,
+          "MinIsIncluded": true,
+          "MaxValue": 0.1,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "",
+          "Multiplier": 1.0,
+          "MinValue": 0.1,
+          "MinIsIncluded": true,
+          "MaxValue": 1000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "k",
+          "Multiplier": 1000.0,
+          "MinValue": 1000.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1000000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "M",
+          "Multiplier": 1000000.0,
+          "MinValue": 1000000.0,
+          "MinIsIncluded": true,
+          "MaxValue": "Infinity",
+          "MaxIsIncluded": true
+        }
+      ],
+      "DefaultMultiplier": 1E-12,
+      "IntegerOnlyValues": false,
+      "Id": 227,
+      "Name": "Ток потребления (Iocc), мА, не более",
+      "Short": "Ток потребления (Iocc), мА, не более",
+      "Width": 87.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnNumeric, DataProvider",
+      "Units": [
+        {
+          "Name": "p",
+          "Multiplier": 1E-12,
+          "MinValue": 0.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-09,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "n",
+          "Multiplier": 1E-09,
+          "MinValue": 1E-09,
+          "MinIsIncluded": true,
+          "MaxValue": 1E-06,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "u",
+          "Multiplier": 1E-06,
+          "MinValue": 1E-06,
+          "MinIsIncluded": true,
+          "MaxValue": 0.001,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "m",
+          "Multiplier": 0.001,
+          "MinValue": 0.001,
+          "MinIsIncluded": true,
+          "MaxValue": 0.1,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "",
+          "Multiplier": 1.0,
+          "MinValue": 0.1,
+          "MinIsIncluded": true,
+          "MaxValue": 1000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "k",
+          "Multiplier": 1000.0,
+          "MinValue": 1000.0,
+          "MinIsIncluded": true,
+          "MaxValue": 1000000.0,
+          "MaxIsIncluded": false
+        },
+        {
+          "Name": "M",
+          "Multiplier": 1000000.0,
+          "MinValue": 1000000.0,
+          "MinIsIncluded": true,
+          "MaxValue": "Infinity",
+          "MaxIsIncluded": true
+        }
+      ],
+      "DefaultMultiplier": 1.0,
+      "IntegerOnlyValues": false,
+      "Id": 259,
+      "Name": "Рабочая температура, °С",
+      "Short": "Рабочая температура, °С",
+      "Width": 56.0
+    },
+    {
+      "$type": "DataProvider.Serialize.ColumnSelective, DataProvider",
+      "Values": [
+        {
+          "Id": 12,
+          "Name": "ТТЛ",
+          "Description": null
+        }
+      ],
+      "Id": 261,
+      "Name": "Технология",
+      "Short": "Технология",
+      "Width": 76.0
+    }
+  ],
+  "tus": [
+    {
+      "Id": 690,
+      "Name": "бК0.347.082ТУ1",
+      "DocLink": ""
+    }
+  ],
+  "mnfs": [
+    {
+      "Id": 8,
+      "Name": "АО «ВЗПП-С»",
+      "Description": ""
+    }
+  ],
+  "ekbs": [
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 1,
+      "Name": "106ЛБ1 ",
+      "Description": "[\"1 \",\"106ЛБ1 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"9 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 3-ВХОДОВЫХ ЛОГИЧЕСКИХ ЭЛЕПО «ИЛИ» И С ЧАСТОТОЙ ПЕРЕКЛЮЧМЕНТА «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖЕНИЯ 0.5 МГц НОСТЬЮ РАСШИРЕНИЯ  \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 9.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 2,
+      "Name": "106ЛБ1А ",
+      "Description": "[\"2 \",\"106ЛБ1А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"9 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 3-ВХОДОВЫХ ЛОГИЧЕСКИХ ЭЛЕПО «ИЛИ» И С ЧАСТОТОЙ ПЕРЕКЛЮЧМЕНТА «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖЕНИЯ 3 МГц НОСТЬЮ РАСШИРЕНИЯ  \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 9.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 3,
+      "Name": "106ЛБ2 ",
+      "Description": "[\"3 \",\"106ЛБ2 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"3.5 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 3-ВХОДНЫХ ЛОГИЧЕСКИХ ЭЛЕМПО «ИЛИ» И СЧАСТОТОЙ ПЕРЕКЛЮЧЕЕНТА «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖННИЯ 0.1 МГц ОСТЬЮ РАСШИРЕНИЯ  \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 3.5,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 4,
+      "Name": "106ЛБ2А ",
+      "Description": "[\"4 \",\"106ЛБ2А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"4.5 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 3-ВХОДОВЫХ ЛОГИЧЕСКИХ ЭЛЕПО «ИЛИ» И С ЧАСТОТОЙ ПЕРЕКЛЮЧМЕНТА «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖЕНИЯ 1.5 МГц НОСТЬЮ РАСШИРЕНИЯ  \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 4.5,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 5,
+      "Name": "106ЛБ5 ",
+      "Description": "[\"5 \",\"106ЛБ5 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"4.5 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ 8-ВХОДОВЫЙ ЭЛЕМЕНТС ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 0.5 МГц «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖНОСТЬ Ю РАСШИРЕНИЯ ПО «ИЛИ» \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 4.5,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 6,
+      "Name": "106ЛБ5А ",
+      "Description": "[\"6 \",\"106ЛБ5А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"6 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ 8-ВХОДОВЫЙ ЭЛЕМЕНТС ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 3 МГц  «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 6.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 7,
+      "Name": "106ЛБ6 ",
+      "Description": "[\"7 \",\"106ЛБ6 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"2 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ 8-ВХОДОВЫЙ ЭЛЕМЕНТС ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 0.1 МГц «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖНОСТЬ Ю РАСШИРЕНИЯ ПО «ИЛИ»   \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 2.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 8,
+      "Name": "106ЛБ6А ",
+      "Description": "[\"8 \",\"106ЛБ6А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"3 (loc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ 8-ВХОДОВЫЙ ЭЛЕМЕНТ «И-НЕ/ИЛИ-НЕ» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» С ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 1.5 МГц \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "226": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 3.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 9,
+      "Name": "106ЛД1 ",
+      "Description": "[\"9 \",\"106ЛД1 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"8-ВХОДОВЫЙ РАСШИРИТЕЛЬ ПО «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПРОСТРАНЕНИЯ СИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <100 (180) нс \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 10,
+      "Name": "106ЛД1А ",
+      "Description": "[\"10 \",\"106ЛД1А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"8-ВХОДОВЫЙ РАСШИРИТЕЛЬ ПО «ИЛПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <4И» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПР0 (80) нс ОСТРАНЕНИЯ СИГНАЛА \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 11,
+      "Name": "106ЛД2 ",
+      "Description": "[\"11 \",\"106ЛД2 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"8-ВХОДОВЫЙ РАСШИРИТЕЛЬ ПО «ИЛПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <1И» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПР30 (180) нс ОСТРАНЕНИЯ СИГНАЛА \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 12,
+      "Name": "106ЛД2А ",
+      "Description": "[\"12 \",\"106ЛД2А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"8-ВХОДОВЫЙ РАСШИРИТЕЛЬ ПО «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПРОСТРАНЕНИЯ СИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <80 (120) нс \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 13,
+      "Name": "106ЛД5 ",
+      "Description": "[\"13 \",\"106ЛД5 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 4-ВХОДОВЫХ РАСШИРИТЕЛЯ ПОСИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮ «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАЧЕНИИ) <100 (180) нс СПРОСТРАНЕНИЯ \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 14,
+      "Name": "106ЛД5А ",
+      "Description": "[\"14 \",\"106ЛД5А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 4-ВХОДОВЫХ РАСШИРИТЕЛЯ ПОСИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮ «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАЧЕНИИ) <40 (80) нс СПРОСТРАНЕНИЯ \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 15,
+      "Name": "106ЛД6 ",
+      "Description": "[\"15 \",\"106ЛД6 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 4-ВХОДОВЫХ РАСШИРИТЕЛЯ ПО «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПРОСТРАНЕНИЯ СИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <130 (180) нс \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 16,
+      "Name": "106ЛД6А ",
+      "Description": "[\"16 \",\"106ЛД6А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"- \",\"-60 ÷ +125 \",\"ТТЛ \",\"ДВА 4-ВХОДОВЫХ РАСШИРИТЕЛЯ ПО «ИЛИ» С ВРЕМЕНЕМ ЗАДЕРЖКИ РАСПРОСТРАНЕНИЯ СИГНАЛА ПРИ ВКЛЮЧЕНИИ (ВЫКЛЮЧЕНИИ) <80 (120) нс \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 17,
+      "Name": "106ЛР1 ",
+      "Description": "[\"17 \",\"106ЛР1 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"5.7 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ ЭЛЕМЕНТ «4-4И-2ИЛИ-НЕ» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» С ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 0.5 МГц \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.7,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 18,
+      "Name": "106ЛР1А ",
+      "Description": "[\"18 \",\"106ЛР1А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"7 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ ЭЛЕМЕНТ «4-4И-2ИЛИ-НПЕРЕКЛЮЧЕНИЯ 3 МГц Е» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» С ЧАСТОТОЙ \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 7.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 19,
+      "Name": "106ЛР2 ",
+      "Description": "[\"19 \",\"106ЛР2 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"2.6 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ ЭЛЕМЕНТ «4-4И-2ИЛИ-НПЕРЕКЛЮЧЕНИЯ 0.1 МГц Е» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» С ЧАСТОТОЙ  \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 2.6,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 20,
+      "Name": "106ЛР2А ",
+      "Description": "[\"20 \",\"106ЛР2А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"3.5 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ЛОГИЧЕСКИЙ ЭЛЕМЕНТ «4-4И-2ИЛИ-НЕ» С ВОЗМОЖНОСТЬЮ РАСШИРЕНИЯ ПО «ИЛИ» С ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 1.5 МГц \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 3.5,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 21,
+      "Name": "106ТР1 ",
+      "Description": "[\"21 \",\"106ТР1 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"9 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ТРИГГЕР С РАЗДЕЛИТЕЛЬНЫМИ ВХОДПЕРЕКЛЮЧЕНИЯ 0.5 МГц АМИ С ЛОГИЧЕСКИМИ ЭЛЕМЕНТАМИ «3И-НЕ» С ЧАСТОТОЙ \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 9.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 22,
+      "Name": "106ТР1А ",
+      "Description": "[\"22 \",\"106ТР1А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"9 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ТРИГГЕР С РАЗДЕЛИТЕЛЬНЫМИ ВХОДПЕРЕКЛЮЧЕНИЯ 3 МГц АМИ С ЛОГИЧЕСКИМИ ЭЛЕМЕНТАМИ «3И-НЕ» С ЧАСТОТОЙ \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 9.0,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 23,
+      "Name": "106ТР2 ",
+      "Description": "[\"23 \",\"106ТР2 \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"3.5 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ТРИГГЕР С РАЗДЕЛИТЕЛЬНЫМИ ВХОДАМИ С ЛОГИЧЕСКИМИ ЭЛЕМЕНТАМИ «3И-НЕ» С ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 0.1 МГц \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 3.5,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 125.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Status": {
+        "Actual": true,
+        "MopStatus": 0
+      },
+      "Id": 24,
+      "Name": "106ТР2А ",
+      "Description": "[\"24 \",\"106ТР2А \",\"бК0.347.082ТУ1 \",\"НП \",\"16 / 16 \",\"401.14 - 3, 5, 5.08, 5НБ, 5.07НБ; 4105.14 - 16.01 \",\"5.0 ± 10 % \",\"4.5 (Iocc) \",\"-60 ÷ +125 \",\"ТТЛ \",\"ТРИГГЕР С РАЗДЕЛИТЕЛЬНЫМИ ВХОДАМИ С ЛОГИЧЕСКИМИ ЭЛЕМЕНТАМИ «3И-НЕ» С ЧАСТОТОЙ ПЕРЕКЛЮЧЕНИЯ 1.5 МГц \"]",
+      "TuId": 690,
+      "MnfId": 8,
+      "Popularity": {
+        "UsedInProducts": 0
+      },
+      "Availability": {
+        "PiecesInStock": 0,
+        "DeliveryTime": null,
+        "DeliveryPrice": null
+      },
+      "ParVals": {
+        "1": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 1
+            }
+          }
+        ],
+        "2": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "3": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 2
+            }
+          }
+        ],
+        "204": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 40
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 43
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 45
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 50
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 44
+            }
+          },
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 118
+            }
+          }
+        ],
+        "205": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 5.0,
+            "Bipolar": false
+          }
+        ],
+        "227": [
+          {
+            "$type": "EkbCatalogClass.o_val, EkbCatalogClass",
+            "Val": 450000,
+            "Bipolar": false
+          }
+        ],
+        "259": [
+          {
+            "$type": "EkbCatalogClass.r_val, EkbCatalogClass",
+            "MinVal": -60.0,
+            "MaxVal": 1250000.0,
+            "Bipolar": false
+          }
+        ],
+        "261": [
+          {
+            "$type": "EkbCatalogClass.item_val, EkbCatalogClass",
+            "Val": {
+              "Id": 12
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

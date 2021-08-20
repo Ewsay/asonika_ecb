@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Search Page
+{% endblock %}
+
+{% block content %}
+    <h1>Страница производителя {{ manufacturer_id }}</h1>
+    <form action="{% url 'manufacturer_ecb' manufacturer_id %}" method="get">
+        <input name="q" type="text" placeholder="Номер детали">
+        <br><br>
+        <button>Поиск</button>
+    </form>
+{% endblock %}

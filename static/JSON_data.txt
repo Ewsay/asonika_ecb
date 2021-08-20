@@ -1,0 +1,2 @@
+['name', 'actual', 'mopstatus', 'validTu', 'validMnf', 'popularity', 'piecesInStock', 'deliveryTime', 'deliveryPrice', 'i2', 'i3', 'r93']
+['200', '200.0', '200.0', '200.0', '200.0', '200.0', '200.0', '200.0', '200', '200', '200']

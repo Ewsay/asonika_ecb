@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'css/ekb_styles1.css' %}">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ekb_styles123.css' %}">
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+</head>
+
+<body>
+
+
+    <!--asonika header-->
+    <header>
+          <div id="up_header">
+            <div class="center_wrap">
+              <div id="logo">
+                <a href="http://asonika-k.ru/">
+                  <img src="{% static '/templates/asktemplate/images/logo.png' %}">
+                </a>
+              </div>
+            </div>  <!---->
+          </div>
+
+          <div id="down_header">
+              <div class="center_wrap">
+                <div id="navigator">
+
+                  <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                      <li class="active">
+                      <span class="divider icon-location"></span>
+                      </li>
+
+
+                      <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="active">
+                        <a itemprop="item" href="/" class="pathway">
+                          <span itemprop="name">ЭКБ</span></a>
+                        <meta itemprop="position" content="1">
+                      </li>
+                  </ul>
+                </div>
+
+            </div>
+          </div>
+        </header>
+    <!--asonika header-->
+
+<div class=main_content>
+    {% block hat %}
+        <div id=categories>
+        {% load i18n mptt_tags %}
+        <ul id='category-ul'>
+            {% recursetree categories %}
+            <li>
+                <a href="{% url 'category' node.id %}" >{{ node.name }}</a>
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+            {% endrecursetree %}
+        </ul>
+        </div>
+    {% endblock %}
+</div>
+</div>
+</body>
+</html>

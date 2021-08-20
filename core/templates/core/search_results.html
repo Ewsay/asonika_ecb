@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Search Results Page
+{% endblock %}
+
+{% block content %}
+<h1>Результат поиска</h1>
+
+{% if elements %}
+    {% for i in elements %}
+        Название: {{ i.name }}<br>
+        Тип детали: {{ i.etype }}<br>
+        Производитель: {{ i.manufacturer.name }}<br>
+        Корпус: {{ i.case.name }}<br>
+        {% if i.etype == "Полевой транзистор" %}
+            Максимальное напряжение сток-исток Uси, В: {{ i.voltage_ds }}
+        {% endif %}
+        {% if i.etype == "Биполярный транзистор" %}
+            Макс. напр. к-э при заданном токе к и разомкнутой цепи б.(Uкэо макс), В: {{ i.voltage_ce }}
+        {% endif %}
+        <br><br>
+    {% endfor %}
+{% else %}
+    Таких деталей нет у данного производителя.
+{% endif %}
+
+{% endblock %}
+
+

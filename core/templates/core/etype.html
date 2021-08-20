@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Search Page
+{% endblock %}
+
+{% block content %}
+<h1>Страница поиска по всем деталям класса {{ etype }}</h1>
+<form action="{% url 'etype_search_results' etype %}" method="post">
+    <h3>Производитель</h3>
+    {% for i in manufacturers %}
+        <input type="checkbox" name="manufacturer_pks" value="{{ i.pk }}">{{ i.name }}<br>
+    {% endfor %}
+    <br>
+
+    <h3>Корпус</h3>
+    {% for i in cases %}
+        <input type="checkbox" name="case_pks" value="{{ i.pk }}">{{ i.name }}<br>
+    {% endfor %}
+    <br><br>
+
+    <button>Поиск</button>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load i18n mptt_tags %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block content %}
+
+    {{ parameters }}
+    <br><br>
+    {{ html_parameters }}
+    <br><br>
+    {% for i in full_elements %}
+        <br><br>
+        {{ i }}
+    {% endfor %}
+
+{% endblock %}
