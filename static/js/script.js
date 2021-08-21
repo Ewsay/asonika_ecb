@@ -43,7 +43,7 @@ const changeValuesState = function(html_parameters) {
 
 					// проверка на соответствия значения и чекбокса
 					if (values[j].slice(-2, -1)[0] === curr_input.value) {
-						console.log('\nValues[j]: ', values[j]);
+						//console.log('\nValues[j]: ', values[j]);
 						if (values[j].slice(-1)[0] === 'true') {
 							curr_input.disabled = false;
 						}
@@ -309,6 +309,7 @@ $(function () {
 
 								if (inclusion_input.length !== 0) {
 									inclusion_input.checked = true;
+									inclusion_input.disabled = false;
 								}
 							}
 
@@ -316,8 +317,38 @@ $(function () {
 								break;
 							}
 
-							inputs[0].value = values[0];
-							inputs[1].value = values[1];
+							// если запрос для текущего параметра
+							// корретный, то убирает disabled с полей ввода
+							if (value[0] !== undefined) {
+								let proccesed_min = values[0].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
+
+								if (isNaN(parseFloat(proccesed_min[0]))) {
+									inputs[0].value = '';
+								}
+								else {
+									inputs[0].value = values[0];
+									inputs[0].disabled = false;
+								}
+							}
+							else {
+								inputs[0].value = '';
+							}
+
+
+							if (value[1] !== undefined) {
+								let proccesed_max = values[1].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
+
+								if (isNaN(parseFloat(proccesed_max[0]))) {
+									inputs[1].value = '';
+								}
+								else {
+									inputs[1].value = values[1];
+									inputs[1].disabled = false;
+								}
+							}
+							else {
+								inputs[1].value = '';
+							}
 						}
 					}
 					else {
@@ -332,6 +363,7 @@ $(function () {
 
 							if (range_input.length !== 0) {
 								range_input.value = value;
+								range_input.disabled = false;
 							}
 						}
 						else {
@@ -339,7 +371,9 @@ $(function () {
 
 							for (let j = 0; j < inputs.length; j++) {
 								if (inputs[j].value === value) {
+									console.log('HERE I AM')
 									inputs[j].checked = true;
+									inputs[j].disabled = false;
 									break;
 								}
 							}
