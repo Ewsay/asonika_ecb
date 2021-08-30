@@ -196,21 +196,21 @@ div#reset_box {
 button#reset_button {
 	width: 200px;
 	margin-left: 15px;
-	border: 1px solid #7d0001;
+	/* border: 1px solid #353232; */
 	border-radius: 3px;
 	font-weight: bold;
 	cursor: pointer;
 	background-color: white;
-	box-shadow: 2px 2px 5px black;
+	background: #ccc;
+  border: none;
+	/* box-shadow: 2px 2px 5px black; */
 	color: black;
 }
 
 
 button#reset_button:hover {
-
-	/*background-color: #222;*/
 	/*color: white;*/
-	box-shadow: 0px 0px 10px red;
+	/* box-shadow: 0px 0px 10px #9e9e9ed0; */
 }
 
 
@@ -310,15 +310,16 @@ button#element_search {
 
 
 .dropdown_header {
-	box-shadow: 0px 0px 3px black;
+	/* box-shadow: 0px 0px 3px black; */
 	display: inline-flex;
 	position: relative;
 	padding: 6px 2px 6px 2px;
 	line-height: 20px;
 	box-sizing: border-box;
 	width: 100%;
-	background-color: #aaa;
-	background: linear-gradient(to right, #aaa, #ccc);
+	background-color: #ccc;
+  border-radius: 4px;
+	/* background: linear-gradient(to right, #aaa, #ccc); */
 }
 
 
@@ -417,7 +418,9 @@ button {
 
 .filter {
 	margin-bottom: 15px;
-	border: 2px solid #333;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px;
+  /* border: 1px solid #999; */
+  border-radius: 4px;
 }
 
 
@@ -660,7 +663,7 @@ div#show_box {
 	position: absolute;
 	background-color: #353232;
 	width: 180px;
-	height: 56px;
+	height:36px;
 	top: 190px;
 	left: 222px;
 	z-index: 1000;	
@@ -678,7 +681,7 @@ div#warn_inp {
 	text-align: left;
 	position: absolute;
 	width: 160px;
-	border: 3px solid red;
+	/* border: 3px solid red; */
 	background-color: white;
 	padding: 4px;
 	z-index: 1;
@@ -706,33 +709,34 @@ button#show_button {
 	position: relative;
 	box-sizing: border-box;
 	width: 140px;
-	top: 13px;
+	top: 2px;
 	height: 30px;
-	background: linear-gradient(to right, #aaa, #eee);
+	/* background: linear-gradient(to right, #aaa, #eee); */
+	background: #353232;
 	border: 0;
 	border-radius: 2px;
 	color: white;
 	font-weight: bold;
 	font-size: 14px;
 	letter-spacing: 1px;
-	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	/* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
 }
 
 
 #show_button:hover {
-	background: linear-gradient(to right, #666, #ddd);
-	box-shadow: 0 0 4px red;
+	color: #ccc;
+	/* box-shadow: 0 0 4px red; */
 }
 
-#show_button:active {
-	background-color: #700008;
-}
+/* #show_button:active {
+	color: #700008;
+} */
 
 
-button#show_button:focus {
+/* button#show_button:focus {
 	box-shadow: 0 0 4px red;
 	outline: none;
-}
+} */
 
 #arr_show {
 	position: absolute;
@@ -760,12 +764,12 @@ button#show_button:focus {
 
 
 div#stat_show_box {
-	background-color: black;
+	/* background-color: black; */
 	width: 200px;
 	height: 40px;
 	text-align: center;
 	border-radius: 4px;
-	box-shadow: 5px 5px 10px #111;
+	/* box-shadow: 5px 5px 10px #111; */
 
 }
 
@@ -776,26 +780,28 @@ button#stat_show_button {
 	width: 190px;
 	top: 5px;
 	height: 30px;
-	background: white;
-	border: 0;
+	background: #ccc;
+  border: none;
+	/* border: 0; */
 	/*color: white;*/
 	font-weight: bold;
+	border-radius: 4px;
 	font-size: 14px;
 	/*letter-spacing: .5px;*/
 	/*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;*/
 }
 
 
-button#stat_show_button:hover {
-	/*background: #aaa;*/
-	border-radius: 0;
-	box-shadow: 1px 1px 10px red;
-}
+/* button#stat_show_button:hover { */
+	/* background: #fff; */
+	/* border-radius: 0; */
+	/* box-shadow: 1px 1px 10px red; */
+/* } */
 
 
 button#stat_show_button:active {
 	background-color: #eee;
-	box-shadow: 1px 1px 25px red;
+	/* box-shadow: 1px 1px 25px red; */
 }
 
 
