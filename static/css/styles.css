@@ -723,13 +723,13 @@ button#show_button {
 }
 
 
-/* #show_button:hover {
-	background: linear-gradient(to right, #666, #ddd);
-	box-shadow: 0 0 4px red;
-} */
+#show_button:hover {
+	color: #ccc;
+	/* box-shadow: 0 0 4px red; */
+}
 
 /* #show_button:active {
-	background-color: #700008;
+	color: #700008;
 } */
 
 
