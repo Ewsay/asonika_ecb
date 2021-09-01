@@ -327,7 +327,7 @@ def get_elements_from_json(data):
                         max_val = in_right_unit(possible_val["MaxVal"], column)
                         #print('\n\nmin_val: ', min_val)
                         #print('max_val: ', max_val)
-                        elem_column.append([f"{min_val} - {max_val}"])
+                        elem_column.append([f"{min_val} — {max_val}"])
                     elif "o_val" in possible_val["$type"]:
                         val = in_right_unit(possible_val["Val"], column)
                         elem_column.append([f"{val}"])
@@ -359,22 +359,23 @@ def get_elements_from_json(data):
 
 
 def in_right_unit(num, column):
-    print('0NUM: ', num)
-    num = ((float(num)) ** 2) ** (1 / 2)  # убирает минус?
-    print('1NUM: ', num)
+    # num = ((float(num)) ** 2) ** (1 / 2)  # ?
+    num = -1 * ((float(num)) ** 2) ** (1 / 2) if float(num) < 0 else ((float(num)) ** 2) ** (1 / 2)
+    # перепеписал первую закоменченную строку с учетом знака
+
+    num = Decimal(str(num)) / Decimal('1.0')  # из -60.0 делает -60
+
     for unit in column["item"]["Units"]:
         min_val = unit["MinValue"] if unit["MinIsIncluded"] else unit["MinValue"] + 1e-10
         max_val = unit["MaxValue"] if (unit["MaxIsIncluded"] or unit["MaxValue"] == 'Infinity') else unit[
                                                                                                          "MaxValue"] - 1e-10
         max_val = 1e+15 if max_val == "Infinity" else max_val
         if min_val <= num <= max_val:
-            num = num / unit["Multiplier"]
-            print('2NUM: ', num)
+            # num = num / unit["Multiplier"]
+            num = '{:f}'.format(Decimal(str(num)) / Decimal(str(unit["Multiplier"])))
             if unit["Multiplier"] != column["item"]["DefaultMultiplier"]:
                 return f"{num} {unit['Name']}".strip(" ")
-            print('1fnum:  ' + f"{num}")
             return f"{num}"
-    print('2fnum:  ' + f"{num}")
     return f"{num}"
 
 
@@ -435,6 +436,7 @@ def in_right_unit(num, column):
 def create_html(parameters, html_parameters, columns_width, fullnames, breadcrumbs):
     short_names = []
     full_names = []
+    # print(html_parameters)
     for vals in html_parameters.values():
         if vals.get("Short") is not None:
             short_names.append(vals["Short"])
