@@ -228,10 +228,11 @@ def get_parameters_from_json(data):
                 "Min": column["item"]["MinVal"],
                 "Max": column["item"]["MaxVal"],
                 "Enabled": str(column["en"]).lower(),
-                "Units": {}
+                "Units": column["item"]["Units"],
+                "DefaultMultiplier": column["item"]["DefaultMultiplier"]
             }
-            for unit in column["item"]["Units"]:
-                html_params[param_code]["Units"][unit["Name"]] = unit["Multiplier"]
+            # for unit in column["item"]["Units"]:
+            #     html_params[param_code]["Units"][unit["Name"]] = unit["Multiplier"]
 
     html_params.update(piecesInStock={
         "Short": "Наличие",
@@ -323,13 +324,13 @@ def get_elements_from_json(data):
                     elif "r_val" in possible_val["$type"]:
                         #print('\n\npossible_val["MinVal"]: ', possible_val["MinVal"])
                         #print('possible_val["MaxVal"]: ', possible_val["MaxVal"])
-                        min_val = in_right_unit(possible_val["MinVal"], column)
-                        max_val = in_right_unit(possible_val["MaxVal"], column)
+                        min_val = in_right_unit(possible_val["MinVal"], column["item"])
+                        max_val = in_right_unit(possible_val["MaxVal"], column["item"])
                         #print('\n\nmin_val: ', min_val)
                         #print('max_val: ', max_val)
                         elem_column.append([f"{min_val} — {max_val}"])
                     elif "o_val" in possible_val["$type"]:
-                        val = in_right_unit(possible_val["Val"], column)
+                        val = in_right_unit(possible_val["Val"], column["item"])
                         elem_column.append([f"{val}"])
             else:
                 elem_column.append(["-"])
@@ -365,7 +366,7 @@ def in_right_unit(num, column):
 
     num = Decimal(str(num)) / Decimal('1.0')  # из -60.0 делает -60
 
-    for unit in column["item"]["Units"]:
+    for unit in column["Units"]:
         min_val = unit["MinValue"] if unit["MinIsIncluded"] else unit["MinValue"] + 1e-10
         max_val = unit["MaxValue"] if (unit["MaxIsIncluded"] or unit["MaxValue"] == 'Infinity') else unit[
                                                                                                          "MaxValue"] - 1e-10
@@ -373,7 +374,7 @@ def in_right_unit(num, column):
         if min_val <= num <= max_val:
             # num = num / unit["Multiplier"]
             num = '{:f}'.format(Decimal(str(num)) / Decimal(str(unit["Multiplier"])))
-            if unit["Multiplier"] != column["item"]["DefaultMultiplier"]:
+            if unit["Multiplier"] != column["DefaultMultiplier"]:
                 return f"{num} {unit['Name']}".strip(" ")
             return f"{num}"
     return f"{num}"
@@ -590,10 +591,10 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
             else:
                 html_text += f'\t\t<div>\n\t\t\t<div class="from">\n\t\t\t\t \
                                 <input id="{parameters[i]}_min" name="{parameters[i]}_min" class="min num_inp" \
-                                type="text" maxlength="10" placeholder="{html_parameters[parameters[i]]["Min"]}"><label class="range_label">от</label> \
+                                type="text" maxlength="10" placeholder="{in_right_unit(html_parameters[parameters[i]]["Min"], html_parameters[parameters[i]])}"><label class="range_label">от</label> \
                                 \n\t\t\t</div>\n\n\t\t\t <div class="to">\n\t\t\t\t \
                                 <input id="{parameters[i]}_max" name="{parameters[i]}_max" class="max num_inp" \
-                                type="text" maxlength="10" placeholder="{html_parameters[parameters[i]]["Max"]}"><label class="range_label">до</label>\n\t\t\t</div>\n\t\t</div>'
+                                type="text" maxlength="10" placeholder="{in_right_unit(html_parameters[parameters[i]]["Max"], html_parameters[parameters[i]])}"><label class="range_label">до</label>\n\t\t\t</div>\n\t\t</div>'
                 if parameters[i][:1] == "o":
                     html_text += f'<label class="filt_label"><input type="checkbox" class="incl_inp"'
                     html_text += 'id="{parameters[i]}" value="1">'
