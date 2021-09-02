@@ -14,7 +14,6 @@ from .models import *
 from decimal import Decimal
 # Create your views here.
 
-
 class HomePageView(TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -231,6 +230,20 @@ def get_parameters_from_json(data):
                 "Units": column["item"]["Units"],
                 "DefaultMultiplier": column["item"]["DefaultMultiplier"]
             }
+
+            # преобразовываем значения ture и false в строковые
+            for units in html_params[param_code]["Units"]:
+                if "MinIsIncluded" in units:
+                    if units["MinIsIncluded"] == True:
+                        units["MinIsIncluded"] = "true"
+                    elif units["MinIsIncluded"] == False:
+                        units["MinIsIncluded"] = "false"
+                if "MaxIsIncluded" in units:
+                    if units["MaxIsIncluded"] == True:
+                        units["MaxIsIncluded"] = "true"
+                    elif units["MaxIsIncluded"] == False:
+                        units["MaxIsIncluded"] = "false"
+
             # for unit in column["item"]["Units"]:
             #     html_params[param_code]["Units"][unit["Name"]] = unit["Multiplier"]
 
@@ -288,7 +301,6 @@ def get_elements_from_json(data):
         elem.append([[ekb["Name"]]])
 
         tu_id_list = ekb["TuIdList"]
-
         tu_arr = []  # отдельный массив для сборки всех ТУ конкретного элемента
         for tu_id in tu_id_list:
             if tu_id in [tu["item"]["Id"] for tu in data["tus"]]:
@@ -299,18 +311,17 @@ def get_elements_from_json(data):
                 tu_arr.append(["-", ''])
         elem.append(tu_arr)
         mnf_id = ekb["MnfId"]
+
         if mnf_id in [mnf["item"]["Id"] for mnf in data["mnfs"]]:
             for mnf in data["mnfs"]:
                 if mnf["item"]["Id"] == mnf_id:
                     elem.append([[mnf["item"]["Name"]]])
         else:
             elem.append([["-"]])
-
         if ekb["Popularity"]["UsedInProducts"] != 0:
             elem.append([["В " + str(ekb["Popularity"]["UsedInProducts"]) + "изделии(-ях)"]])
         else:
             elem.append([["Не применяется"]])
-
         for column in data["columns"]:
             elem_column = []
             column_id = str(column["item"]["Id"])
@@ -365,7 +376,6 @@ def in_right_unit(num, column):
     # перепеписал первую закоменченную строку с учетом знака
 
     num = Decimal(str(num)) / Decimal('1.0')  # из -60.0 делает -60
-
     for unit in column["Units"]:
         min_val = unit["MinValue"] if unit["MinIsIncluded"] else unit["MinValue"] + 1e-10
         max_val = unit["MaxValue"] if (unit["MaxIsIncluded"] or unit["MaxValue"] == 'Infinity') else unit[
