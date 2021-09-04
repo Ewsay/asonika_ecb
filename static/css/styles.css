@@ -1,5 +1,7 @@
 #up_header {
-    background: #000;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px;
+    margin-bottom: 10px;
+    background: #fff;
     height: 60px;
     width: 100%;
     padding-left: 20px;
@@ -16,7 +18,7 @@
 
 #logo {
     margin-top: 20px;
-    float: left;
+    float: center;
 }
 
 
@@ -40,14 +42,15 @@
     /* margin-right: 10px; */
     position: relative;
     display: block;
+    color: #000;
 }
 
 
 #down_header {
-    background: #353232;
     /*height: 40px;*/ /* убрал */
     min-height: 40px;
     width: 100%;
+    color: #000;
 }
 
 
@@ -60,7 +63,7 @@
     float: left;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11pt;
-    color: #FFFFFF;
+    color: #000;
 }
 
 
@@ -102,7 +105,7 @@
 #navigator a, a:link, a:visited, .menu a, a:link, a:visited {
     outline: none;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #323232;
 }
 
 
@@ -183,7 +186,7 @@ button:hover {
 
 
 button:active {
-	background-color: grey;
+	background-color: #a8a8a8;
 }
 
 
@@ -196,15 +199,13 @@ div#reset_box {
 button#reset_button {
 	width: 200px;
 	margin-left: 15px;
-	/* border: 1px solid #353232; */
+  margin-bottom: 10px;
 	border-radius: 3px;
 	font-weight: bold;
 	cursor: pointer;
-	background-color: white;
-	background: #ccc;
+	background-color: #e22323;
   border: none;
-	/* box-shadow: 2px 2px 5px black; */
-	color: black;
+	color: #fff;
 }
 
 
@@ -215,7 +216,7 @@ button#reset_button:hover {
 
 
 button#reset_button:active {
-	background-color: #eee;
+	background-color: #b31616;
 }
 
 
@@ -241,13 +242,13 @@ div#search_tab {
 
 
 input#element_search_bar {
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 	height: 30px;
 	width: 75%;
 	max-width: 400px;
-	border-radius: 0;
-	border: 2px solid black;
-	box-shadow: 2px 2px 2px grey;
+	border-radius: 4;
+	border: 1px solid black;
+	/* box-shadow: 2px 2px 2px grey; */
 }
 
 
@@ -302,10 +303,10 @@ div#number_of_displayed_elements {
 }
 
 
-/*
+
 button#element_search {
-	border-radius: 0;
-}*/
+	border-radius: 4;
+}
 
 
 
@@ -317,7 +318,8 @@ button#element_search {
 	line-height: 20px;
 	box-sizing: border-box;
 	width: 100%;
-	background-color: #ccc;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px;
+	background-color: #fff;
   border-radius: 4px;
 	/* background: linear-gradient(to right, #aaa, #ccc); */
 }
@@ -329,7 +331,8 @@ button#element_search {
 
 
 .dropdown_header:before {
-	padding-right: 2px;
+	/* padding-right: 4px; */
+  padding-left: 4px;
 	content: "▼";
 	color: #222;
 }
@@ -425,7 +428,9 @@ button {
 
 
 .filter_opened .filter_select {
-	padding-top: 2px;
+	padding-left: 6px;
+	padding-top: 10px;
+	padding-bottom: 4px;
 	display: block;
 	max-height: 230px;
 	overflow-y: auto;
@@ -496,7 +501,7 @@ table {
 	min-width: calc(100vw - 350px);
 	table-layout: fixed;
 	border-spacing: 0;
-	border-top: 2px solid #333;
+	border-top: 2px solid #5a5a5a;
 	text-align: left;
 }
 
@@ -559,13 +564,13 @@ td, th {
 
 
 thead tr {
-	background: linear-gradient(to bottom, #bbb, #ccc);
+	background: rgb(238, 238, 238);
 	height: 80px;
 }
 
 
 tbody tr:hover {
-	background-color: #eee;
+	background-color: rgb(240, 245, 255);
 }
 
 
@@ -780,8 +785,9 @@ button#stat_show_button {
 	width: 190px;
 	top: 5px;
 	height: 30px;
-	background: #ccc;
+	background: #56d661;
   border: none;
+  color: #fff;
 	/* border: 0; */
 	/*color: white;*/
 	font-weight: bold;
@@ -800,7 +806,7 @@ button#stat_show_button {
 
 
 button#stat_show_button:active {
-	background-color: #eee;
+	background: #3cb146;
 	/* box-shadow: 1px 1px 25px red; */
 }
 

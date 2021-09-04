@@ -1,9 +1,11 @@
 #up_header {
-    background: #000;
+    background: #fff;
+    border: none;
     height: 60px;
     width: 100%;
     padding-left: 20px;
-    box-sizing: border-box;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px;
+    margin-bottom: 10px;
 }
 
 .center_wrap {
@@ -41,7 +43,7 @@
 
 
 #down_header {
-    background: #353232;
+    /* background: #d8d8d8; */
     /*height: 40px;*/ /* убрал */
     min-height: 40px;
     width: 100%;
@@ -96,7 +98,7 @@
 #navigator a, a:link, a:visited, .menu a, a:link, a:visited {
     outline: none;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #232323;
 }
 
 #search {
