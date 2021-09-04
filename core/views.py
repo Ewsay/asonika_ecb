@@ -10,10 +10,11 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
-
 from decimal import Decimal
-# Create your views here.
+import pdb
 
+
+# Create your views here.
 
 class HomePageView(TemplateView):
 
@@ -61,7 +62,8 @@ def get_category_data(request):
         return JsonResponse(json.loads(get_elements_from_json(data)), safe=False,
                             json_dumps_params={'ensure_ascii': False})
     else:
-        r = requests.get(f'http://localhost:5000/api/ekb/Filter?categoryId={cat_id}&{query_str}', data=request.GET, verify=False, headers=headers)
+        r = requests.get(f'http://localhost:5000/api/ekb/Filter?categoryId={cat_id}&{query_str}', data=request.GET,
+                         verify=False, headers=headers)
         data = r.json()
 
         r2 = requests.get(f'http://localhost:5000/api/ekb/Filter?categoryId={cat_id}', data=request.GET, verify=False)
@@ -72,7 +74,6 @@ def get_category_data(request):
             safe=False,
             json_dumps_params={'ensure_ascii': False}
         )
-
 
 
 def get_category(request, category_id):
@@ -140,7 +141,6 @@ def get_category(request, category_id):
     #     f.write(str(get_parameters_from_json(data)["html"]) + "\n")
     #     f.write(str(get_elements_from_json(data)))
 
-
     return HttpResponse(create_html(
         get_parameters_from_json(data)["codes"],
         get_parameters_from_json(data)["html"],
@@ -154,15 +154,15 @@ def get_parameters_from_json(data):
     cat_params = ["actual", "mopstatus", "validTu", "validMnf", "popularity"]
     sizes = ['150']
     sizes = sizes + ["150" for _ in range(4)]
-    fullnames = ['Перспективность', 'Статус элемента', 'Техническое условие', 'Производитель', 'Применяемость', 'Наличие на складе',
-                 'Сроки поставки', 'Стоимость поставки']
+    fullnames = ['Перспективность', 'Статус элемента', 'Техническое условие', 'Производитель', 'Применяемость',
+                 'Наличие на складе', 'Сроки поставки', 'Стоимость поставки']
     html_params = {
         "actual": {
             "Short": "Перспективность",
             "Name": "Перспективность",
             "Selective": "true",
-            "Values":  [['Да', 'true', str(data["ekbfiltrstatus"]["enactyes"]).lower()],
-                        ['Нет', 'false', str(data["ekbfiltrstatus"]["enactno"]).lower()]]
+            "Values": [['Да', 'true', str(data["ekbfiltrstatus"]["enactyes"]).lower()],
+                       ['Нет', 'false', str(data["ekbfiltrstatus"]["enactno"]).lower()]]
         },
         "mopstatus": {
             "Short": "Статус",
@@ -228,10 +228,25 @@ def get_parameters_from_json(data):
                 "Min": column["item"]["MinVal"],
                 "Max": column["item"]["MaxVal"],
                 "Enabled": str(column["en"]).lower(),
-                "Units": {}
+                "Units": column["item"]["Units"],
+                "DefaultMultiplier": column["item"]["DefaultMultiplier"]
             }
-            for unit in column["item"]["Units"]:
-                html_params[param_code]["Units"][unit["Name"]] = unit["Multiplier"]
+
+            # преобразовываем значения ture и false в строковые
+            for units in html_params[param_code]["Units"]:
+                if "MinIsIncluded" in units:
+                    if units["MinIsIncluded"] == True:
+                        units["MinIsIncluded"] = "true"
+                    elif units["MinIsIncluded"] == False:
+                        units["MinIsIncluded"] = "false"
+                if "MaxIsIncluded" in units:
+                    if units["MaxIsIncluded"] == True:
+                        units["MaxIsIncluded"] = "true"
+                    elif units["MaxIsIncluded"] == False:
+                        units["MaxIsIncluded"] = "false"
+
+            # for unit in column["item"]["Units"]:
+            #     html_params[param_code]["Units"][unit["Name"]] = unit["Multiplier"]
 
     html_params.update(piecesInStock={
         "Short": "Наличие",
@@ -255,11 +270,10 @@ def get_parameters_from_json(data):
         "Max": data["ekbfiltrpriceanddelivery"]["deliveryprice_max"],
         "Enabled": str(data["ekbfiltrpriceanddelivery"]["delivery_available"]).lower()
     })
-    #print('\nTHIS ARE HTML PARAMETERS FOR DATA:\n', data)
-    #print('\nHTML_PARAMETERS:\n', html_params)
+
     # Тоже должны добавить Наличие на складе и поставку в конец
     cat_params += ["piecesInStock", "deliveryTime",
-                  "deliveryPrice"]
+                   "deliveryPrice"]
     sizes += ['180']
     # print('HTML PARAMS:\n', html_params)
     return {
@@ -287,7 +301,6 @@ def get_elements_from_json(data):
         elem.append([[ekb["Name"]]])
 
         tu_id_list = ekb["TuIdList"]
-
         tu_arr = []  # отдельный массив для сборки всех ТУ конкретного элемента
         for tu_id in tu_id_list:
             if tu_id in [tu["item"]["Id"] for tu in data["tus"]]:
@@ -297,19 +310,19 @@ def get_elements_from_json(data):
             else:
                 tu_arr.append(["-", ''])
         elem.append(tu_arr)
+
         mnf_id = ekb["MnfId"]
+
         if mnf_id in [mnf["item"]["Id"] for mnf in data["mnfs"]]:
             for mnf in data["mnfs"]:
                 if mnf["item"]["Id"] == mnf_id:
                     elem.append([[mnf["item"]["Name"]]])
         else:
             elem.append([["-"]])
-
         if ekb["Popularity"]["UsedInProducts"] != 0:
             elem.append([["В " + str(ekb["Popularity"]["UsedInProducts"]) + "изделии(-ях)"]])
         else:
             elem.append([["Не применяется"]])
-
         for column in data["columns"]:
             elem_column = []
             column_id = str(column["item"]["Id"])
@@ -321,15 +334,11 @@ def get_elements_from_json(data):
                             if val["item"]["Id"] == val_id:
                                 elem_column.append([val["item"]["Name"]])
                     elif "r_val" in possible_val["$type"]:
-                        #print('\n\npossible_val["MinVal"]: ', possible_val["MinVal"])
-                        #print('possible_val["MaxVal"]: ', possible_val["MaxVal"])
-                        min_val = in_right_unit(possible_val["MinVal"], column)
-                        max_val = in_right_unit(possible_val["MaxVal"], column)
-                        #print('\n\nmin_val: ', min_val)
-                        #print('max_val: ', max_val)
-                        elem_column.append([f"{min_val} - {max_val}"])
+                        min_val = in_right_unit(possible_val["MinVal"], column["item"])
+                        max_val = in_right_unit(possible_val["MaxVal"], column["item"])
+                        elem_column.append([f"{min_val} — {max_val}"])
                     elif "o_val" in possible_val["$type"]:
-                        val = in_right_unit(possible_val["Val"], column)
+                        val = in_right_unit(possible_val["Val"], column["item"])
                         elem_column.append([f"{val}"])
             else:
                 elem_column.append(["-"])
@@ -351,31 +360,41 @@ def get_elements_from_json(data):
             availability.append([f"Стоимость поставки: {ekb['Availability']['DeliveryPrice']} руб."])
         elem.append(availability)
 
-
         elems.append(elem)
     res = [elems, get_parameters_from_json(data)["html"]]
     return str(res).replace("'", "\"")
     # return elems
 
 
+def add_unit(number, unit_info, default_multiplier):
+    number = '{:f}'.format(Decimal(str(number)) / Decimal(str(unit_info["Multiplier"])))
+    if unit_info["Multiplier"] != default_multiplier:
+        return f"{number} {unit_info['Name']}".strip(" ")
+    return f"{number}"
+
+
 def in_right_unit(num, column):
-    print('0NUM: ', num)
-    num = ((float(num)) ** 2) ** (1 / 2)  # убирает минус?
-    print('1NUM: ', num)
-    for unit in column["item"]["Units"]:
-        min_val = unit["MinValue"] if unit["MinIsIncluded"] else unit["MinValue"] + 1e-10
-        max_val = unit["MaxValue"] if (unit["MaxIsIncluded"] or unit["MaxValue"] == 'Infinity') else unit[
-                                                                                                         "MaxValue"] - 1e-10
-        max_val = 1e+15 if max_val == "Infinity" else max_val
-        if min_val <= num <= max_val:
-            num = num / unit["Multiplier"]
-            print('2NUM: ', num)
-            if unit["Multiplier"] != column["item"]["DefaultMultiplier"]:
-                return f"{num} {unit['Name']}".strip(" ")
-            print('1fnum:  ' + f"{num}")
-            return f"{num}"
-    print('2fnum:  ' + f"{num}")
-    return f"{num}"
+    # num = ((float(num)) ** 2) ** (1 / 2)  # ?
+    num = -1 * ((float(num)) ** 2) ** (1 / 2) if float(num) < 0 else ((float(num)) ** 2) ** (1 / 2)
+    # переписал первую закоменченную строку с учетом знака
+    for unit in column["Units"]:
+        min_val = unit["MinValue"]
+        max_val = 1e+15 if unit["MaxValue"] == "Infinity" else unit["MaxValue"]
+        if unit["MinIsIncluded"] is True or unit["MinIsIncluded"] == 'true':
+            if unit["MaxIsIncluded"] is True or unit["MaxIsIncluded"] == 'true':
+                if min_val <= num <= max_val:
+                    return add_unit(num, unit, column["DefaultMultiplier"])
+            else:
+                if min_val <= num < max_val:
+                    return add_unit(num, unit, column["DefaultMultiplier"])
+        else:
+            if unit["MaxIsIncluded"] is True or unit["MaxIsIncluded"] == 'true':
+                if min_val < num <= max_val:
+                    return add_unit(num, unit, column["DefaultMultiplier"])
+            else:
+                if min_val < num < max_val:
+                    return add_unit(num, unit, column["DefaultMultiplier"])
+    return f"{Decimal(str(num)) / Decimal('1.0')}"
 
 
 # def get_categories_parameters(categories):
@@ -435,6 +454,7 @@ def in_right_unit(num, column):
 def create_html(parameters, html_parameters, columns_width, fullnames, breadcrumbs):
     short_names = []
     full_names = []
+    # print(html_parameters)
     for vals in html_parameters.values():
         if vals.get("Short") is not None:
             short_names.append(vals["Short"])
@@ -495,7 +515,7 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
                         <a itemprop="item" href="/category/{breadcrumbs[i][1]}" class="pathway">
                           <span itemprop="name">{breadcrumbs[i][0]}</span></a>
                           <span class="divider"><img src="/static/templates/asktemplate/images/arrow.png" alt=""></span>
-                        <meta itemprop="position" content="{i+2}">
+                        <meta itemprop="position" content="{i + 2}">
                       </li>'''
         else:
             html_text += f'''
@@ -588,10 +608,10 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
             else:
                 html_text += f'\t\t<div>\n\t\t\t<div class="from">\n\t\t\t\t \
                                 <input id="{parameters[i]}_min" name="{parameters[i]}_min" class="min num_inp" \
-                                type="text" maxlength="10" placeholder="{html_parameters[parameters[i]]["Min"]}"><label class="range_label">от</label> \
+                                type="text" maxlength="10" placeholder="{in_right_unit(html_parameters[parameters[i]]["Min"], html_parameters[parameters[i]])}"><label class="range_label">от</label> \
                                 \n\t\t\t</div>\n\n\t\t\t <div class="to">\n\t\t\t\t \
                                 <input id="{parameters[i]}_max" name="{parameters[i]}_max" class="max num_inp" \
-                                type="text" maxlength="10" placeholder="{html_parameters[parameters[i]]["Max"]}"><label class="range_label">до</label>\n\t\t\t</div>\n\t\t</div>'
+                                type="text" maxlength="10" placeholder="{in_right_unit(html_parameters[parameters[i]]["Max"], html_parameters[parameters[i]])}"><label class="range_label">до</label>\n\t\t\t</div>\n\t\t</div>'
                 if parameters[i][:1] == "o":
                     html_text += f'<label class="filt_label"><input type="checkbox" class="incl_inp"'
                     html_text += 'id="{parameters[i]}" value="1">'
