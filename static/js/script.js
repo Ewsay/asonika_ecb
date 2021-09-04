@@ -9,6 +9,62 @@ var checked = []
 var units;
 
 
+// берет значения диапазонных парамтеров из URL и переносит
+// их с нужными единицами измерения в соответствующие input поля
+const URLValueToInput = function(value, parameter_info) {
+	// добавляет единицу измерения, если она не стоит по умолчанию
+	function appendUnit(value, current_unit, current_multiplier, default_multiplier) {
+		if (current_multiplier == default_multiplier) {
+			return parseFloat((value / default_multiplier).toFixed(10));
+		}
+
+		value = value / current_multiplier;
+		return `${value} ${current_unit}`;
+	}
+
+	if (parameter_info == undefined) {
+		return value;
+	}
+
+	let default_multiplier = parameter_info["DefaultMultiplier"];
+
+	for (let unit of parameter_info["Units"]) {
+		let check = false;
+		let min_val = unit["MinValue"];
+		let max_val = unit["MaxValue"];
+
+		if (unit["MinIsIncluded"] === 'true') {
+			if (unit["MaxIsIncluded"] === 'true') {
+				if (min_val <= value && value <= max_val) {
+					check = true;
+				}
+			}
+			else {
+				if (min_val <= value && value < max_val) {
+					check = true;
+				}
+			}
+		}
+		else {
+			if (unit["MaxIsIncluded"] === 'true') {
+				if (min_val < value && value <= max_val) {
+					check = true;
+				}
+			}
+			else {
+				if (min_val < value && value < max_val) {
+					check = true;
+				}
+			}
+		}
+
+		if (check !== false) {
+			return appendUnit(value, unit["Name"], unit["Multiplier"], default_multiplier);
+		}
+	}
+}
+
+
 // ставит disabled для тех полей ввода, которые неактуальны,
 // иначе убирает disabled
 const changeValuesState = function(html_parameters) {
@@ -323,13 +379,14 @@ $(function () {
 							// корретный, то убирает disabled с полей ввода
 
 							if (values[0] != "") {
+								// следующая строка лишняя, в url пробелы заменяются на %20
 								let proccesed_min = values[0].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 
 								if (isNaN(parseFloat(proccesed_min[0]))) {
 									inputs[0].value = '';
 								}
 								else {
-									inputs[0].value = values[0];
+									inputs[0].value = URLValueToInput(values[0], units[code]);
 									inputs[0].disabled = false;
 								}
 							}
@@ -339,13 +396,14 @@ $(function () {
 
 
 							if (values[1] != "") {
+								// следующая строка лишняя, в url пробелы заменяются на %20
 								let proccesed_max = values[1].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 
 								if (isNaN(parseFloat(proccesed_max[0]))) {
 									inputs[1].value = '';
 								}
 								else {
-									inputs[1].value = values[1];
+									inputs[1].value = URLValueToInput(values[1], units[code]);;
 									inputs[1].disabled = false;
 								}
 							}
