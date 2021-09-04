@@ -5,8 +5,11 @@ var displayedElements = 0;
 var countClicked = 0;
 var countFiltered = 0;
 var searchClicked = false;
-var checked = []
-var units;
+var checked = [];
+
+// каждый раз при загрузке категории ее определяем
+// потому что нужен доступ к ней из многих функции
+var html_parameters;
 
 
 // берет значения диапазонных парамтеров из URL и переносит
@@ -15,7 +18,7 @@ const URLValueToInput = function(value, parameter_info) {
 	// добавляет единицу измерения, если она не стоит по умолчанию
 	function appendUnit(value, current_unit, current_multiplier, default_multiplier) {
 		if (current_multiplier == default_multiplier) {
-			return parseFloat((value / default_multiplier).toFixed(10));
+			return parseFloat((value / default_multiplier).toFixed(12));
 		}
 
 		value = value / current_multiplier;
@@ -145,7 +148,7 @@ const changeValuesState = function(html_parameters) {
 }
 
 
-const composeInputField = function(string_value, float_value, current_unit, default_unit) {
+const composeInputField = function(float_value, current_unit, default_unit) {
 	let pair = [];
 	// console.log('float_value: ', float_value)
 	// console.log('default_unit: ', default_unit)
@@ -163,7 +166,7 @@ const composeInputField = function(string_value, float_value, current_unit, defa
 	}
 	// console.log('new addition');
 	if (unit_chars[current_unit] !== undefined) {
-		pair.push(string_value + ' ' + current_unit);
+		pair.push(float_value + ' ' + current_unit);
 		pair.push(float_value * unit_chars[current_unit]);
 	}
 	else {
@@ -294,7 +297,7 @@ $(function () {
 		.then(res => res.json())
 		.then(data => {
 			displayElements(data[0]); 
-			units = data[1];
+			html_parameters = data[1];
 			$("#load_items").css({
 	        	'width': ($("#table_elements").width() + 'px')
 			});
@@ -386,7 +389,7 @@ $(function () {
 									inputs[0].value = '';
 								}
 								else {
-									inputs[0].value = URLValueToInput(values[0], units[code]);
+									inputs[0].value = URLValueToInput(values[0], html_parameters[code]);
 									inputs[0].disabled = false;
 								}
 							}
@@ -403,7 +406,7 @@ $(function () {
 									inputs[1].value = '';
 								}
 								else {
-									inputs[1].value = URLValueToInput(values[1], units[code]);;
+									inputs[1].value = URLValueToInput(values[1], html_parameters[code]);;
 									inputs[1].disabled = false;
 								}
 							}
@@ -448,13 +451,13 @@ $(function () {
 				}
 			}
 
-			// в этом случае не нужно вызывать changeValuesState(units),
+			// в этом случае не нужно вызывать changeValuesState(html_parameters),
 			// так как при переходе на страницу создается новый html,
 			// в котором все значения в фильтрах отображаются правильно
 			
 
 			// console.log('this is the data:\n', data[0])
-			// console.log('these are the units:\n', units)
+			// console.log('these are the html_parameters:\n', html_parameters)
 		});
 	} else {
 		 // var time = performance.now();
@@ -471,17 +474,17 @@ $(function () {
 			// console.log('FINISH display: ', time2);
 
 
-			units = data[1];
+			html_parameters = data[1];
 			$("#load_items").css({
 	        	'width': ($("#table_elements").width() + 'px')
 			});
-			// в этом случае не нужно вызывать changeValuesState(units),
+			// в этом случае не нужно вызывать changeValuesState(html_parameters),
 			// так как при переходе на страницу создается новый html,
 			// в котором все значения в фильтрах отображаются правильно
 
 
 			// console.log('this is the data:\n', data[0])
-			console.log('these are the units:\n', units)
+			// console.log('these are the html_parameters:\n', html_parameters)
 
 			 // time = performance.now() - time;
 			 // console.log('FINISH:', time);
@@ -545,7 +548,7 @@ $(function () {
 		.then(res => res.json())
 		.then(data => {
 			displayElements(data[0]); 
-			units = data[1];
+			html_parameters = data[1];
 		})
 	});
 
@@ -619,26 +622,47 @@ $(function () {
 
 			if (inputBoxes.length != 0) {
 				let code = inputBoxes[0].id.split('_')[0];
-				let min = inputBoxes[0].value.trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
-				let max = inputBoxes[1].value.trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
+				let processed_min = inputBoxes[0].value.trim().replace(/\s+/g, ' ').replace(',', '.');
+				let processed_max = inputBoxes[1].value.trim().replace(/\s+/g, ' ').replace(',', '.');
 
-				let float_min = parseFloat(min[0]);
-				let float_max = parseFloat(max[0]);
+				let min_unit_index = processed_min.search(/[a-zA-Zа-яА-Я]/);
+				let max_unit_index = processed_max.search(/[a-zA-Zа-яА-Я]/);
 
-				if (code.substring(0, 1) === "o" || code.substring(0, 1) === "r") {	
-					if (isNaN(float_min) == true && isNaN(float_max) == true) {
+				let float_min, float_max, unit_min, unit_max;
+
+				if (min_unit_index === -1) {
+					float_min = parseFloat(processed_min);
+				}
+				else {
+					float_min = parseFloat(processed_min.slice(0, min_unit_index));
+					// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
+					unit_min = processed_min.slice(min_unit_index).split(' ')[0];
+				}
+
+
+				if (max_unit_index === -1) {
+					float_max = parseFloat(processed_max);
+				}
+				else {
+					float_max = parseFloat(processed_max.slice(0, max_unit_index));
+					// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
+					unit_max = processed_max.slice(max_unit_index).split(' ')[0];
+				}
+
+				if (code.substring(0, 1) === "o" || code.substring(0, 1) === "r") {
+					if (isNaN(float_min) === true && isNaN(float_max) === true) {
 						inputBoxes[0].value = '';
 						inputBoxes[1].value = '';
 						continue;
 					}
-					// console.log(units);
+					// console.log(html_parameters);
 					// console.log(code);
 					
-					console.log('units: ', units);
+					console.log('html_parameters: ', html_parameters);
 					console.log('code: ', code);
-					console.log(units[code])
+					console.log(html_parameters[code])
 
-					if (units[code] === undefined) {
+					if (html_parameters[code] === undefined) {
 						if (code.slice(0, 1) === 'r') {
 							// иногда коды r[id] конвертируются в o[id] и наоборот
 							// лучше посмотреть сообщение по проекту в вк за 20 августа
@@ -652,27 +676,28 @@ $(function () {
 							continue;
 						}
 					} 
-					let par_name = units[code]["Short"];
+					let par_name = html_parameters[code]["Short"];
 					let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
 					console.log('par_name', par_name)
-					let cur_units = units[code]["Units"];
+					let cur_units = html_parameters[code]["Units"];
 
 					// console.log(par_name);
 					// console.log(cur_units);
 
-					console.log('min[1]: ', min[1])
+					console.log('unit_min: ', unit_min)
 
 					let unit_for_min = false;
 					for (let unit of cur_units) {
-						if (unit["Name"] == min[1]) {
-							inputBoxes[0].value = min[0] + ' ' + min[1];
+						if (unit["Name"] == unit_min) {
+							inputBoxes[0].value = float_min + ' ' + unit_min;
 							float_min = float_min * unit["Multiplier"];
 							unit_for_min = true;
 						}
 					}
 		
 					if (unit_for_min !== true) {
-						let pair = composeInputField(min[0], float_min, min[1], units[code]["DefaultMultiplier"])
+						let pair = composeInputField(float_min, unit_min, html_parameters[code]["DefaultMultiplier"])
+						console.log('\npair: ', pair)
 						inputBoxes[0].value = pair[0];
 						float_min = pair[1];
 					}
@@ -680,15 +705,15 @@ $(function () {
 
 					let unit_for_max = false;
 					for (let unit of cur_units) {
-						if (unit["Name"] == max[1]) {
-							inputBoxes[1].value = max[0] + ' ' + max[1];
+						if (unit["Name"] == unit_max) {
+							inputBoxes[1].value = float_max + ' ' + unit_max;
 							float_max = float_max * unit["Multiplier"];
 							unit_for_max = true;
 						}
 					}
 
 					if (unit_for_max !== true) {
-						let pair = composeInputField(max[0], float_max, max[1], units[code]["DefaultMultiplier"])
+						let pair = composeInputField(float_max, unit_max, html_parameters[code]["DefaultMultiplier"])
 						inputBoxes[1].value = pair[0];
 						float_max = pair[1];
 					}
@@ -706,13 +731,13 @@ $(function () {
 					getText += code + ':';
 
 					if (!isNaN(float_min)) {
-						getText += parseFloat(parseFloat(float_min).toFixed(19)) + '~';
+						getText += parseFloat(parseFloat(float_min).toFixed(12)) + '~';
 						if (!isNaN(float_max)) {
-							getText += parseFloat(parseFloat(float_max).toFixed(19));
+							getText += parseFloat(parseFloat(float_max).toFixed(12));
 						}
 					}
 					else {
-						getText += '~' + parseFloat(parseFloat(float_max).toFixed(19));
+						getText += '~' + parseFloat(parseFloat(float_max).toFixed(12));
 					}
 					if (i != filters.length - 1) {
 						getText += '&';
@@ -776,9 +801,9 @@ $(function () {
 			.then(res => res.json())
 			.then(data => {
 				displayElements(data[0]); 
-				units = data[1];
-				console.log('these are the units:\n', units)
-				changeValuesState(units);
+				html_parameters = data[1];
+				console.log('\nhtml_parameters:\n', html_parameters)
+				changeValuesState(html_parameters);
 			});
 		} else {
 			console.log('here:');
@@ -786,9 +811,9 @@ $(function () {
 			.then(res => res.json())
 			.then(data => {
 				displayElements(data[0]);
-				units = data[1];
-				console.log('these are the units:\n', units)
-				changeValuesState(units);
+				html_parameters = data[1];
+				console.log('\nhtml_parameters:\n', html_parameters)
+				changeValuesState(html_parameters);
 			});
 		}
 	});
@@ -938,8 +963,8 @@ $(function () {
 		.then(res => res.json())
 		.then(data => {
 			displayElements(data[0]);
-			units = data[1];
-			changeValuesState(units);
+			html_parameters = data[1];
+			changeValuesState(html_parameters);
 		});
 
 
