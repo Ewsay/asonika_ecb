@@ -89,7 +89,7 @@ const changeValuesState = function(html_parameters) {
 }
 
 
-const composeInputField = function(input_value, float_value, multiplier, default_unit) {
+const composeInputField = function(string_value, float_value, current_unit, default_unit) {
 	let pair = [];
 	// console.log('float_value: ', float_value)
 	// console.log('default_unit: ', default_unit)
@@ -106,9 +106,9 @@ const composeInputField = function(input_value, float_value, multiplier, default
 		'T': 1E+12,
 	}
 	// console.log('new addition');
-	if (unit_chars[multiplier] !== undefined) {
-		pair.push(input_value + ' ' + multiplier);
-		pair.push(float_value * unit_chars[multiplier]);
+	if (unit_chars[current_unit] !== undefined) {
+		pair.push(string_value + ' ' + current_unit);
+		pair.push(float_value * unit_chars[current_unit]);
 	}
 	else {
 		pair.push(float_value);
@@ -298,6 +298,8 @@ $(function () {
 							let inclusion_input = $('#filter_' + code).find('incl_inp');
 
 							if (first_letter === 'r') {
+								// иногда коды r[id] конвертируются в o[id] и наоборот
+								// лучше посмотреть сообщение по проекту в вк за 20 августа
 								inputs = inputs.length ? inputs : $('#filter_' + code.replace('r', 'o')).find('.num_inp');
 
 								if (inclusion_input.length !== 0) {
@@ -319,7 +321,8 @@ $(function () {
 
 							// если запрос для текущего параметра
 							// корретный, то убирает disabled с полей ввода
-							if (value[0] !== undefined) {
+
+							if (values[0] != "") {
 								let proccesed_min = values[0].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 
 								if (isNaN(parseFloat(proccesed_min[0]))) {
@@ -335,7 +338,7 @@ $(function () {
 							}
 
 
-							if (value[1] !== undefined) {
+							if (values[1] != "") {
 								let proccesed_max = values[1].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 
 								if (isNaN(parseFloat(proccesed_max[0]))) {
@@ -493,13 +496,13 @@ $(function () {
 	$('#stat_show_button').on('click', function (e) {
 		e.preventDefault();
 		displayedElements = 0;
-		var getText = '';
+		let getText = '';
 		
-		var filters = $(".filter_select");
+		let filters = $(".filter_select");
 
 
-		for (var i = 0; i < filters.length; i++) {
-			var checkedBoxes = filters[i].querySelectorAll('.inp_label:checked');
+		for (let i = 0; i < filters.length; i++) {
+			let checkedBoxes = filters[i].querySelectorAll('.inp_label:checked');
 			if (checkedBoxes != undefined && checkedBoxes.length != 0) {
 				if (checkedBoxes[0].getAttribute("type") == "radio") {
 					if (checkedBoxes[0].value != "none") {
@@ -537,7 +540,7 @@ $(function () {
 					code = code + '=';
 
 					getText += code;
-					for (var j = 0; j < checkedBoxes.length; j++) {
+					for (let j = 0; j < checkedBoxes.length; j++) {
 						getText += checkedBoxes[j].value;
 						if (j != checkedBoxes.length - 1) {
 							getText += '&' + code;
@@ -553,15 +556,16 @@ $(function () {
 		}
 		
 
-		for (var i = 0; i < filters.length; i++) {
-			var inputBoxes = filters[i].querySelectorAll('.num_inp');
+		for (let i = 0; i < filters.length; i++) {
+			let inputBoxes = filters[i].querySelectorAll('.num_inp');
+
 			if (inputBoxes.length != 0) {
 				let code = inputBoxes[0].id.split('_')[0];
 				let min = inputBoxes[0].value.trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 				let max = inputBoxes[1].value.trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
 
-				var float_min = parseFloat(min[0]);
-				var float_max = parseFloat(max[0]);
+				let float_min = parseFloat(min[0]);
+				let float_max = parseFloat(max[0]);
 
 				if (code.substring(0, 1) === "o" || code.substring(0, 1) === "r") {	
 					if (isNaN(float_min) == true && isNaN(float_max) == true) {
@@ -578,6 +582,8 @@ $(function () {
 
 					if (units[code] === undefined) {
 						if (code.slice(0, 1) === 'r') {
+							// иногда коды r[id] конвертируются в o[id] и наоборот
+							// лучше посмотреть сообщение по проекту в вк за 20 августа
 							code = code.replace('r', 'o');
 						}
 						else if (code.slice(0, 1) === 'o') {
@@ -588,82 +594,45 @@ $(function () {
 							continue;
 						}
 					} 
-					var par_name = units[code]["Short"];
-					var default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
+					let par_name = units[code]["Short"];
+					let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
 					console.log('par_name', par_name)
-					var cur_units = units[code]["Units"];
+					let cur_units = units[code]["Units"];
 
 					// console.log(par_name);
 					// console.log(cur_units);
 
 					console.log('min[1]: ', min[1])
-					if (cur_units[min[1]] != undefined) {
-						inputBoxes[0].value = min[0] + ' ' + min[1];
-						float_min = float_min * cur_units[min[1]];
+
+					let unit_for_min = false;
+					for (let unit of cur_units) {
+						if (unit["Name"] == min[1]) {
+							inputBoxes[0].value = min[0] + ' ' + min[1];
+							float_min = float_min * unit["Multiplier"];
+							unit_for_min = true;
+						}
 					}
-					else {
-						let pair = composeInputField(min[0], float_min, min[1], cur_units[default_unit])
+		
+					if (unit_for_min !== true) {
+						let pair = composeInputField(min[0], float_min, min[1], units[code]["DefaultMultiplier"])
 						inputBoxes[0].value = pair[0];
 						float_min = pair[1];
-						// switch (multiplier) {
-						// 	case 'p':
-						// 		pair.push(' p');
-						// 		pair.push(float_min * 1E-12)
-						// 		inputBoxes[0].value = min[0] + ' p';
-						// 		float_min = float_min * 1E-12;
-						// 		break;
-						// 	case 'n':
-						// 		inputBoxes[0].value = min[0] + ' n';
-						// 		float_min = float_min * 1E-9;
-						// 		break;
-						// 	case 'μ':
-						// 		inputBoxes[0].value = min[0] + ' μ';
-						// 		float_min = float_min * 1E-6;
-						// 		break;
-						// 	case 'm':
-						// 		inputBoxes[0].value = min[0] + ' m';
-						// 		float_min = float_min * 1E-3;
-						// 		break;
-						// 	case 'c':
-						// 		inputBoxes[0].value = min[0] + ' c';
-						// 		float_min = float_min * 1E-2;
-						// 		break;
-						// 	case 'k':
-						// 		inputBoxes[0].value = min[0] + ' k';
-						// 		float_min = float_min * 1E+3;
-						// 		break;
-						// 	case 'M':
-						// 		inputBoxes[0].value = min[0] + ' M';
-						// 		float_min = float_min * 1E+6;
-						// 		break;
-						// 	case 'G':
-						// 		inputBoxes[0].value = min[0] + ' G';
-						// 		float_min = float_min * 1E+9;
-						// 		break;
-						// 	case 'T':
-						// 		inputBoxes[0].value = min[0] + ' p';
-						// 		float_min = float_min * 1E+12;
-						// 		break;
-						// 	default:
-						// 		inputBoxes[0].value = float_min;
-						// 		float_min = float_min * cur_units[default_unit];
-						// 		break;
-						// }
-
-						// inputBoxes[0].value = float_min;
-						// float_min = float_min * cur_units[default_unit];
 					}
 
 
-					if (cur_units[max[1]] != undefined) {
-						inputBoxes[1].value = max[0] + ' ' + max[1];
-						float_max = float_max * cur_units[max[1]];
+					let unit_for_max = false;
+					for (let unit of cur_units) {
+						if (unit["Name"] == max[1]) {
+							inputBoxes[1].value = max[0] + ' ' + max[1];
+							float_max = float_max * unit["Multiplier"];
+							unit_for_max = true;
+						}
 					}
-					else {
-						let pair = composeInputField(max[0], float_max, max[1], cur_units[default_unit])
+
+					if (unit_for_max !== true) {
+						let pair = composeInputField(max[0], float_max, max[1], units[code]["DefaultMultiplier"])
 						inputBoxes[1].value = pair[0];
 						float_max = pair[1];
-						console.log(pair);
 					}
 
 
@@ -712,6 +681,7 @@ $(function () {
 					else {
 						getText += `Max${code}=${float_max}`;
 					}
+
 					if (i != filters.length - 1) {
 						getText += '&';
 					}
@@ -738,12 +708,11 @@ $(function () {
 		}
 
 		document.getElementById("table_body").innerHTML = "";
-		console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'))
+		console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
 
 		let url_search = window.location.search;
 		console.log('url:    ', url_search);
 		if (url_search != '') {
-
 			console.log('here: ', url_search);
 			fetch('/catget' + url_search)
 			.then(res => res.json())
