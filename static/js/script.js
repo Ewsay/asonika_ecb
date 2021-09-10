@@ -324,6 +324,7 @@ const displayElements = function (data) {
 		}
 	}
 	$('.preloader').remove();
+	$('.load_preloader').remove();
 	$('.main_content').css('display', 'block');
 
 	document.getElementById("table_body").innerHTML = message;
@@ -611,6 +612,11 @@ $(function () {
 
 
 	$('#load_items').on('click', function() {
+		$(this).css('display', 'none');
+		let load_preloader = $('<div></div>');
+		load_preloader.addClass('load_preloader');
+		load_preloader.css('width', $(this).width() + 2 + 'px');
+		load_preloader.insertAfter($('#load_items'));
 		fetch('/catget')
 		.then(res => res.json())
 		.then(data => {
