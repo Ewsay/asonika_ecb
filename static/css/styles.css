@@ -952,3 +952,10 @@ input[type=radio]:checked + span:before {
     /*margin-left: 240px;*/
     margin: 0 auto;
 }
+
+
+.load_preloader {
+    height: 40px;
+    background: repeat-x url(../images/items_loading.gif) #fff;
+    background-position-y: top;
+}
