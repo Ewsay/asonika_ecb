@@ -340,6 +340,11 @@ def get_elements_from_json(data):
                     elif "o_val" in possible_val["$type"]:
                         val = in_right_unit(possible_val["Val"], column["item"])
                         elem_column.append([f"{val}"])
+                    elif "o_t_val" in possible_val["$type"]:
+                        # скопировано со случая o_val, возможно нужна будет
+                        # дополнительная обработка
+                        val = in_right_unit(possible_val["Val"], column["item"])
+                        elem_column.append([f"{val}"])
             else:
                 elem_column.append(["-"])
             elem.append(elem_column)

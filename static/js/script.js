@@ -238,6 +238,7 @@ const displayElements = function (data) {
 			for (var k = 0; k < data[displayedElements][j].length; k++) {
 				// console.log(data[displayedElements][j][k][0])			
 				
+
 				var link = data[displayedElements][j][k][1];
 				var cur_val = data[displayedElements][j][k][0];
 				if (link != undefined && link != '') {
@@ -263,6 +264,8 @@ const displayElements = function (data) {
 
 		message += '</tr>';
 	}
+	$('.preloader').css('display', 'none');
+	$('.main_content').css('display', 'block');
 	document.getElementById("table_body").innerHTML = message;
 	if (data.length) {
 		document.getElementById("number_of_displayed_elements").innerHTML = 'Найдено элементов: ' + data.length;
@@ -276,7 +279,6 @@ const displayElements = function (data) {
 	else {
 		$('#load_items').css('display', 'block');
 	}
-	// displayedElements = Math.min(data.length, 50);
 }
 
 
@@ -285,6 +287,10 @@ const displayElements = function (data) {
 
 
 $(function () {
+	let preloader = $('<div></div>');
+	preloader.addClass('preloader');
+	preloader.insertBefore($('.main_content'));
+	
 	$("#load_items").css({'width': ($("#table_elements").width() + 'px')});
 	console.log('window location:', window.location)
 	let url_search = window.location.search;
@@ -519,7 +525,6 @@ $(function () {
 			if (scroll == 0) { btt.fadeOut(400); }
 			return; 
 		}
-		
         let table = $('#table_elements');
         let head = $('#sticky_table').height();
         if (scroll > 0) {
@@ -527,8 +532,8 @@ $(function () {
         		$('#sticky_div').css('top', table.height() - head);
         	}
         	else {
-        		if (scroll >= 158) {
-	                $('#sticky_div').css('top', scroll - 158);
+        		if (scroll >= 178) {
+	                $('#sticky_div').css('top', scroll - 178);
 	            }
 	            else {
 	                $('#sticky_div').css('top', 0);
