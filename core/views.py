@@ -35,6 +35,25 @@ def get_home_tree(request):
 from django.urls import resolve
 
 
+def get_info(request):
+    template_name = 'core/info.html'
+    # parent_id = request.GET[]
+    # item_id = request.GET[]
+    # info = get_right_html(1, 1)
+    info = str(request.GET.items())
+    return render(
+            request,
+            template_name,
+            {
+                'info': info
+            }
+        )
+
+
+def get_right_html(parent_id, item_id):
+    return "ooo"
+
+
 # обработчик для моего запроса элементов категории из js
 def get_category_data(request):
     arr = request.META["HTTP_REFERER"].split("?")
