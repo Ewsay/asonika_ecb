@@ -35,20 +35,33 @@ def get_home_tree(request):
 from django.urls import resolve
 
 
-def get_info(request):
+def get_info(request, column_id, parameter_id):
     template_name = 'core/info.html'
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = str(request.GET.items())
+    info = requests.get(f'https://localhost:5001/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', data=request.GET, verify=False)
     return render(
             request,
             template_name,
             {
-                'info': info
+                'info': info.text
             }
         )
 
+def get_mnfs(request, mnf_id):
+    template_name = 'core/mnfs.html'
+    # parent_id = request.GET[]
+    # item_id = request.GET[]
+    # info = get_right_html(1, 1)
+    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
+    return render(
+            request,
+            template_name,
+            {
+                'info': info.text
+            }
+        )
 
 def get_right_html(parent_id, item_id):
     return "ooo"
@@ -335,7 +348,7 @@ def get_elements_from_json(data):
         if mnf_id in [mnf["item"]["Id"] for mnf in data["mnfs"]]:
             for mnf in data["mnfs"]:
                 if mnf["item"]["Id"] == mnf_id:
-                    elem.append([[mnf["item"]["Name"]]])
+                    elem.append([[mnf["item"]["Name"], f'mnfs/{mnf_id}']])
         else:
             elem.append([["-"]])
         if ekb["Popularity"]["UsedInProducts"] != 0:
@@ -351,7 +364,10 @@ def get_elements_from_json(data):
                         val_id = possible_val["Val"]["Id"]
                         for val in column["item"]["Values"]:
                             if val["item"]["Id"] == val_id:
-                                elem_column.append([val["item"]["Name"]])
+                                if (val["item"]["HasDescription"] is True):
+                                    elem_column.append([val["item"]["Name"], f'info/{column_id}/{val_id}'])
+                                else:
+                                    elem_column.append([val["item"]["Name"]])
                     elif "r_val" in possible_val["$type"]:
                         min_val = in_right_unit(possible_val["MinVal"], column["item"])
                         max_val = in_right_unit(possible_val["MaxVal"], column["item"])
