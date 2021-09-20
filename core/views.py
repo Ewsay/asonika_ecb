@@ -63,9 +63,19 @@ def get_mnfs(request, mnf_id):
             }
         )
 
-def get_right_html(parent_id, item_id):
-    return "ooo"
-
+def get_tus(request, tu_id):
+    template_name = 'core/tus.html'
+    # parent_id = request.GET[]
+    # item_id = request.GET[]
+    # info = get_right_html(1, 1)
+    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
+    return render(
+            request,
+            template_name,
+            {
+                'info': info.text
+            }
+        )
 
 # обработчик для моего запроса элементов категории из js
 def get_category_data(request):
@@ -338,7 +348,11 @@ def get_elements_from_json(data):
             if tu_id in [tu["item"]["Id"] for tu in data["tus"]]:
                 for tu in data["tus"]:
                     if tu["item"]["Id"] == tu_id:
-                        tu_arr.append([tu["item"]["Name"], tu["item"]["DocLink"]])
+                        if tu["item"]["DocLink"] == "":
+                            tu_arr.append([tu["item"]["Name"]])
+                        else:
+                            tuWithLink = "<a href=" + tu["item"]["DocLink"] + ">" + tu["item"]["Name"] + "</a>"
+                            tu_arr.append([tuWithLink])
             else:
                 tu_arr.append(["-", ''])
         elem.append(tu_arr)
