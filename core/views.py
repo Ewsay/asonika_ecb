@@ -5,7 +5,7 @@ from random import randint, random
 from urllib.parse import unquote
 
 from django.db.models import Q
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse, Http404
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.views.decorators.csrf import csrf_exempt
@@ -76,6 +76,13 @@ def get_tus(request, tu_id):
                 'info': info.text
             }
         )
+
+def get_doc(request, tu_doc):
+    path_to_file = os.path.abspath(os.path.dirname(__file__)) + '/docs/' + tu_doc
+    try:
+        return FileResponse(open(path_to_file, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
 
 # обработчик для моего запроса элементов категории из js
 def get_category_data(request):
@@ -351,8 +358,8 @@ def get_elements_from_json(data):
                         if tu["item"]["DocLink"] == "":
                             tu_arr.append([tu["item"]["Name"]])
                         else:
-                            tuWithLink = "<a href=" + tu["item"]["DocLink"] + ">" + tu["item"]["Name"] + "</a>"
-                            tu_arr.append([tuWithLink])
+                            link_to_file = 'docs/' + tu["item"]["DocLink"]
+                            tu_arr.append([tu["item"]["Name"], link_to_file])
             else:
                 tu_arr.append(["-", ''])
         elem.append(tu_arr)

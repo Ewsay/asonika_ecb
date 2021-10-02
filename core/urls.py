@@ -7,5 +7,6 @@ urlpatterns = [
     path('home_tree', get_home_tree, name='tree'),
     path('catget', get_category_data, name='category_data'),
     path('info/<int:column_id>/<int:parameter_id>', get_info, name='info'),
-    path('mnfs/<int:mnf_id>', get_mnfs, name='mnfs')
+    path('mnfs/<int:mnf_id>', get_mnfs, name='mnfs'),
+    path('docs/<str:tu_doc>', get_doc, name='info')
 ]

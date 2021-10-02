@@ -6,6 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    os.startfile("C:/Users/User/Desktop/Codes/AsonicaProject/EKBOperations/EKBApi/bin/Release/net5.0/EkbCatalogApi.exe")
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'asonika_ecb.settings')
     try:
         from django.core.management import execute_from_command_line
