@@ -6,7 +6,7 @@ from urllib.parse import unquote
 
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse, FileResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
@@ -55,13 +55,7 @@ def get_mnfs(request, mnf_id):
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
     info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
-    return render(
-            request,
-            template_name,
-            {
-                'info': info.text
-            }
-        )
+    return redirect(f'https://localhost:5001/api/company/{mnf_id}')
 
 def get_tus(request, tu_id):
     template_name = 'core/tus.html'

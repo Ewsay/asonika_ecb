@@ -201,19 +201,12 @@ String.prototype.width = function() {
 	return max;
 }
 
-
 const displayElements = function (data) {
 	console.log('START display')
 	let time = performance.now();
 	console.log('displayedElements: ', displayedElements);
 	let col_widths = [];
-	//console.log(data[0].length);
-	for (let i = 0; i < data[0].length - 1; i++) {
-		col_widths[i] = 0;
-	}
 
-	//console.log('col_widths: ', col_widths);
-	//console.log('data:', data)
 	var message = document.getElementById("table_body").innerHTML;
 	var limit = 200 + displayedElements;
 	var a_tag = '<a class="opener" target="_blank" rer="noopener noreferrer"href="/';
