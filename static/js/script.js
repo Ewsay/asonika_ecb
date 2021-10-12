@@ -201,12 +201,19 @@ String.prototype.width = function() {
 	return max;
 }
 
+
 const displayElements = function (data) {
 	console.log('START display')
 	let time = performance.now();
 	console.log('displayedElements: ', displayedElements);
 	let col_widths = [];
+	//console.log(data[0].length);
+	for (let i = 0; i < data[0].length - 1; i++) {
+		col_widths[i] = 0;
+	}
 
+	//console.log('col_widths: ', col_widths);
+	//console.log('data:', data)
 	var message = document.getElementById("table_body").innerHTML;
 	var limit = 200 + displayedElements;
 	var a_tag = '<a class="opener" target="_blank" rer="noopener noreferrer"href="/';
@@ -608,8 +615,8 @@ $(function () {
 		$(this).css('display', 'none');
 		let load_preloader = $('<div></div>');
 		load_preloader.addClass('load_preloader');
-		load_preloader.css('width', $(this).width() + 2 + 'px');
-		load_preloader.insertAfter($('#load_items'));
+		// load_preloader.css('width', $(this).width() + 2 + 'px');
+		load_preloader.insertBefore($('.main_content'));;
 		fetch('/catget')
 		.then(res => res.json())
 		.then(data => {
@@ -625,6 +632,9 @@ $(function () {
 
 
 	$('#stat_show_button').on('click', function (e) {
+		let load_preloader = $('<div></div>');
+		load_preloader.addClass('load_preloader');
+		load_preloader.insertBefore($('.main_content'));;
 		e.preventDefault();
 		displayedElements = 0;
 		let getText = '';
@@ -997,7 +1007,9 @@ $(function () {
 
 
 	$('#reset_button').on('click', function () {
-
+		let load_preloader = $('<div></div>');
+		load_preloader.addClass('load_preloader');
+		load_preloader.insertBefore($('.main_content'));;
 		var checked_boxes = $("input:checkbox:checked");
 		var input_boxes = $("input[type=text]");
 		var warnboxes = $('.warn_box');
