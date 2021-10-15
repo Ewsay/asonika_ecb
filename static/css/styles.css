@@ -199,7 +199,7 @@ div#reset_box {
 
 button#reset_button {
 	width: 200px;
-	margin-left: 15px;
+	margin-left: 20px;
   margin-bottom: 10px;
 	border-radius: 3px;
 	font-weight: bold;
@@ -411,10 +411,10 @@ button {
 
 
 #filters {
-	float: left;
-	margin-left: 15px;
-	margin-bottom: 50px;
-	width: 200px;
+    float: left;
+    margin-left: 13px;
+    margin-bottom: 50px;
+    width: 207px;
 	user-select: none;
 	/*box-sizing: border-box;*/
 }
@@ -433,7 +433,7 @@ button {
 	padding-top: 10px;
 	padding-bottom: 4px;
 	display: block;
-	max-height: 230px;
+	max-height: 224px;
 	overflow-y: auto;
 }
 
@@ -770,10 +770,12 @@ button#show_button {
 
 div#stat_show_box {
 	/* background-color: black; */
-	width: 200px;
+	margin-top: 14px;
 	height: 40px;
+    text-align: right;
+	/*width: 200px;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 4px;*/
 	/* box-shadow: 5px 5px 10px #111; */
 
 }
@@ -782,7 +784,7 @@ div#stat_show_box {
 button#stat_show_button {
 	box-sizing: border-box;
 	position: relative;
-	width: 190px;
+	width: 200px;
 	top: 5px;
 	height: 30px;
 	background: #56d661;
@@ -954,6 +956,7 @@ input[type=radio]:checked + span:before {
 }
 
 
+
 .load_preloader {
     /*height: 40px;
     background: repeat-x url(../images/items_loading.gif) #fff;
@@ -966,4 +969,85 @@ input[type=radio]:checked + span:before {
     height: 100vh;
     opacity: 0.5;
     background: center no-repeat url(../images/loading.gif) #fff;
+}
+
+
+
+/*
+*::-webkit-scrollbar {
+width: 7px;
+}
+*::-webkit-scrollbar-thumb {
+background-color: black;
+border: 1px solid black;
+background: red;
+}
+*::-webkit-scrollbar-track {
+background: #e0e0e0;
+}*/
+
+
+
+#filterform {
+    border-top: 2px solid #5a5a5a;
+    direction: rtl;
+    max-height: 1000px;
+    overflow-y: scroll;
+    box-shadow: 1px 1px 2px black;
+    margin-top: 0px;
+    box-sizing: border-box;
+}
+
+
+
+#filterform > * {
+direction: ltr;
+}
+
+
+
+.filter:last-child {
+margin-bottom: 0px;
+}
+
+
+
+form#filterform::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+
+form#filterform::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background: red;
+}
+
+
+
+form#filterform::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+
+
+form#filterform *::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+
+form#filterform *::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background: red;
+}
+
+
+
+form#filterform *::-webkit-scrollbar-track {
+    background: #e0e0e0;
 }
