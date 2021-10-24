@@ -620,14 +620,6 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
 
             <div id=number_of_displayed_elements></div>
 
-            <div id="search_tab">
-                <form id="search_form">
-                  <input name="sq" id="element_search_bar" type="text" placeholder="Поиск по названию">
-                  <span></span>
-                  <button id="element_search" type="submit" title="Начать поиск элементов">Найти</button>
-
-                </form>
-            </div>
           </div>
 
 
@@ -635,7 +627,10 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
             <div class="filters_and_elements">
 
               <div id="filters">
-              <form id="filterform" method="get">
+              <div id="filterform">
+                <div class="search_div"><input name="search" id="element_search_bar" type="text" placeholder="Поиск по названию">
+    	            <svg class="search_lupe" data-search="0"></svg> 
+                </div>
     '''
 
     for i in range(len(parameters)):
@@ -709,9 +704,9 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
     # colgroup += '</colgroup>'
 
     html_text += f'''
-                    </form>
+                    </div>
                     <div id="stat_show_box">
-                  <button form="filterform" id="stat_show_button">Применить</button>
+                  <button id="stat_show_button">Применить</button>
                 </div>
               </div> <!-- End of filters div -->  
 
