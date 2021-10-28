@@ -529,10 +529,12 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="../../static/js/jquery-3.5.1.min.js"></script>
+        <script src="../../static/pagination/jquery.simplePagination.js"></script>
         <script src="../../static/js/ajax.js"></script>
         <script src="../../static/js/script.js"></script>
         <title>Проект АСОНИКА-К ЭКБ | {breadcrumbs[-1][0]}</title>
         <link rel="stylesheet" href="../../static/css/styles.css">
+        <link rel="stylesheet" href="../../static/pagination/simplePagination.css">
       </head>
 
       <body>
@@ -756,7 +758,7 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
                   <tbody id="table_body">
                   </tbody>
                 </table>
-                <div id="load_items">Загрузить элементы</div>
+                <div class="compact-theme"></div>
               </div>
 
             </div> <!-- End of filters_and_elements div -->  
