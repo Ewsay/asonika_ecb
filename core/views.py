@@ -81,8 +81,10 @@ def get_category_data(request):
         return JsonResponse(json.loads(get_elements_from_json(data)), safe=False,
                             json_dumps_params={'ensure_ascii': False})
     else:
+        print(query_str)
         r = requests.get(f'http://localhost:5000/api/ekb/Filter?categoryId={cat_id}&{query_str}', data=request.GET,
                          verify=False, headers=headers)
+        
         data = r.json()
 
         r2 = requests.get(f'http://localhost:5000/api/ekb/Filter?categoryId={cat_id}', data=request.GET, verify=False)
@@ -579,8 +581,6 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
           <div id="show_box_close">
           </div>
         </div>
-
-
 
 
         <div class=main_content>

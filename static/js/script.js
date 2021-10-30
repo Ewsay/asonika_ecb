@@ -15,6 +15,273 @@ var checked = [];
 // потому что нужен доступ к ней из многих функции
 var html_parameters;
 
+let displayWithFilters = function(pageNumb = 0){
+	displayedElements = 0;
+	let getText = '';
+	
+	let filters = $(".filter_select");
+
+	for (let i = 0; i < filters.length; i++) {
+		let checkedBoxes = filters[i].querySelectorAll('.inp_label:checked');
+		if (checkedBoxes != undefined && checkedBoxes.length != 0) {
+			if (checkedBoxes[0].getAttribute("type") == "radio") {
+				if (checkedBoxes[0].value != "none") {
+					getText += filters[i].id.split('_')[1] + '=';
+					getText += checkedBoxes[0].value;
+
+					if (i != filters.length - 1) {
+						getText += '&';
+					}
+				}
+
+				continue;
+			}
+			
+			let code = filters[i].id.split('_')[1];
+			// console.log(code);
+			if (code.substring(0, 1) === "i") {
+				code = 'filter=' + code + ':';
+				getText += code;
+				//console.log(code);
+				for (var j = 0; j < checkedBoxes.length; j++) {
+					// console.log(checkedBoxes[j]);
+					getText += checkedBoxes[j].value;
+					//console.log(getText);
+					//console.log('checkboxed[j].value: ', checkedBoxes[j].value)
+					if (j != checkedBoxes.length - 1) {
+						getText += ',';
+					}
+				}
+				// if (i != filters.length - 1) {
+					
+				// }
+			}
+			else {
+				code = code + '=';
+
+				getText += code;
+				for (let j = 0; j < checkedBoxes.length; j++) {
+					getText += checkedBoxes[j].value;
+					if (j != (checkedBoxes.length - 1)) {
+						getText += '&' + code;
+					}
+				}
+				// if (i != filters.length - 1) {
+				// 	getText += '&';
+				// }
+			}
+
+			getText += '&';
+		}
+	}
+	
+	for (let i = 0; i < filters.length; i++) {
+		let inputBoxes = filters[i].querySelectorAll('.num_inp');
+
+		if (inputBoxes.length != 0) {
+			let code = inputBoxes[0].id.split('_')[0];
+			let processed_min = inputBoxes[0].value.trim().replace(/\s+/g, ' ').replace(',', '.');
+			let processed_max = inputBoxes[1].value.trim().replace(/\s+/g, ' ').replace(',', '.');
+
+			let min_unit_index = processed_min.search(/[a-zA-Zа-яА-Я]/);
+			let max_unit_index = processed_max.search(/[a-zA-Zа-яА-Я]/);
+
+			let float_min, float_max, unit_min, unit_max;
+
+			if (min_unit_index === -1) {
+				float_min = parseFloat(processed_min);
+			}
+			else {
+				float_min = parseFloat(processed_min.slice(0, min_unit_index));
+				// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
+				unit_min = processed_min.slice(min_unit_index).split(' ')[0];
+			}
+
+			if (max_unit_index === -1) {
+				float_max = parseFloat(processed_max);
+			}
+			else {
+				float_max = parseFloat(processed_max.slice(0, max_unit_index));
+				// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
+				unit_max = processed_max.slice(max_unit_index).split(' ')[0];
+			}
+
+			if (code.substring(0, 1) === "o" || code.substring(0, 1) === "r") {
+				if (isNaN(float_min) === true && isNaN(float_max) === true) {
+					inputBoxes[0].value = '';
+					inputBoxes[1].value = '';
+					continue;
+				}
+				// console.log(html_parameters);
+				// console.log(code);
+				
+				console.log('html_parameters: ', html_parameters);
+				console.log('code: ', code);
+				console.log(html_parameters[code])
+
+				if (html_parameters[code] === undefined) {
+					if (code.slice(0, 1) === 'r') {
+						// иногда коды r[id] конвертируются в o[id] и наоборот
+						// лучше посмотреть сообщение по проекту в вк за 20 августа
+						code = code.replace('r', 'o');
+					}
+					else if (code.slice(0, 1) === 'o') {
+						code = code.replace('o', 'r');
+					}
+					else {
+						console.log('\nReally weird thing happened');
+						continue;
+					}
+				} 
+				let par_name = html_parameters[code]["Short"];
+				let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
+				console.log('par_name', par_name)
+				let cur_units = html_parameters[code]["Units"];
+
+				// console.log(par_name);
+				// console.log(cur_units);
+
+				console.log('unit_min: ', unit_min)
+
+				let unit_for_min = false;
+				for (let unit of cur_units) {
+					if (unit["Name"] == unit_min) {
+						inputBoxes[0].value = float_min + ' ' + unit_min;
+						float_min = float_min * unit["Multiplier"];
+						unit_for_min = true;
+					}
+				}
+	
+				if (unit_for_min !== true) {
+					let pair = composeInputField(float_min, unit_min, html_parameters[code]["DefaultMultiplier"])
+					console.log('\npair: ', pair)
+					inputBoxes[0].value = pair[0];
+					float_min = pair[1];
+				}
+
+				let unit_for_max = false;
+				for (let unit of cur_units) {
+					if (unit["Name"] == unit_max) {
+						inputBoxes[1].value = float_max + ' ' + unit_max;
+						float_max = float_max * unit["Multiplier"];
+						unit_for_max = true;
+					}
+				}
+
+				if (unit_for_max !== true) {
+					let pair = composeInputField(float_max, unit_max, html_parameters[code]["DefaultMultiplier"])
+					inputBoxes[1].value = pair[0];
+					float_max = pair[1];
+				}
+
+
+				if (isNaN(float_min) == true) { inputBoxes[0].value = ''; }
+				if (isNaN(float_max) == true) { inputBoxes[1].value = ''; }
+
+				if (code.substring(0, 1) === "o" && filters[i].querySelector('.incl_inp').checked == false) {
+					code = code.replace('o', 'r');
+				}
+
+				code = 'filter=' + code;
+				getText += code + ':';
+
+				if (!isNaN(float_min)) {
+					getText += parseFloat(parseFloat(float_min).toFixed(12)) + '~';
+					if (!isNaN(float_max)) {
+						getText += parseFloat(parseFloat(float_max).toFixed(12));
+					}
+				}
+				else {
+					getText += '~' + parseFloat(parseFloat(float_max).toFixed(12));
+				}
+				if (i != filters.length - 1) {
+					getText += '&';
+				}
+			}
+			else {
+				if (isNaN(float_min) == true && isNaN(float_max) == true) {
+					inputBoxes[0].value = '';
+					inputBoxes[1].value = '';
+					continue;
+				}
+
+				if (isNaN(float_min) == true) { inputBoxes[0].value = ''; }
+				if (isNaN(float_max) == true) { inputBoxes[1].value = ''; }
+				
+				if (!isNaN(float_min)) {
+					getText += `Min${code}=${float_min}`;
+					if (!isNaN(float_max)) {
+						getText += `&Max${code}=${float_max}`;
+					}
+				}
+				else {
+					getText += `Max${code}=${float_max}`;
+				}
+
+				if (i != (filters.length - 1)) {
+					getText += '&';
+				}
+			}
+
+			// console.log(code.slice(0, -1));
+		}
+	}
+
+	let pageStr = 'Page=' + pageNumb;
+
+	getText += (getText == '') ? '':'&';
+	getText += pageStr;
+	console.log('getText: ', getText);
+	if (getText.slice(-1) == '&') {
+		getText = getText.slice(0, -1);
+	}
+	console.log('getText: ', getText);
+
+
+	$('#show_box').css('display', 'none');
+
+	if (getText == '') {
+		window.history.pushState(null, null, window.location.pathname);
+	}
+	else {
+		window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(getText).replaceAll('%26', '&').replaceAll('%3D', '='));
+	}
+
+	document.getElementById("table_body").innerHTML = "";
+	console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
+
+	let url_search = window.location.search;
+	console.log('url:    ', url_search);
+	if (url_search != '') {
+		console.log('here: ', url_search);
+		fetch('/catget' + url_search)
+		.then(res => res.json())
+		.then(data => {
+			displayElements(data[0], pageNumb); 
+			html_parameters = data[1];
+			console.log('\nhtml_parameters:\n', html_parameters)
+			changeValuesState(html_parameters);
+
+			$("#load_items").css({
+				'width': ($("#table_elements").width() + 'px')
+			});
+		});
+	} else {
+		console.log('here:');
+		fetch('/catget')
+		.then(res => res.json())
+		.then(data => {
+			displayElements(data[0], pageNumb);
+			html_parameters = data[1];
+			console.log('\nhtml_parameters:\n', html_parameters)
+			changeValuesState(html_parameters);
+
+			$("#load_items").css({
+				'width': ($("#table_elements").width() + 'px')
+			});
+		});
+	}
+}
 
 // берет значения диапазонных парамтеров из URL и переносит
 // их с нужными единицами измерения в соответствующие input поля
@@ -181,7 +448,6 @@ const composeInputField = function(float_value, current_unit, default_unit) {
 	return pair;
 }
 
-
 String.prototype.width = function() {
 	let words = this.split(/[ -]/);
 	let max;
@@ -200,21 +466,43 @@ String.prototype.width = function() {
 	return max;
 }
 
+let updatePaginator = function($, dataLength = 0, currPage = 0) {
+	// Consider adding an ID to your table
+	// incase a second table ever enters the picture.
 
-const displayElements = function (data) {
+	var numItems = dataLength;
+	var perPage = 50;
+	console.log(1);
+
+	// Now setup the pagination using the `.pagination-page` div.
+	$(".compact-theme").pagination({
+		items: numItems,
+		itemsOnPage: perPage,
+		cssStyle: "light-theme",
+		currentPage: currPage,
+
+		// This is the actual page changing functionality.
+		onPageClick: function(pageNumber) {
+			// We need to show and hide `tr`s appropriately.
+			displayWithFilters(pageNumber);
+		}
+	});
+};
+
+const displayElements = function (data, pageNumb = 0) {
 	console.log('START display')
 	let time = performance.now();
 	console.log('displayedElements: ', displayedElements);
 	let col_widths = [];
 	//console.log(data[0].length);
-	for (let i = 0; i < data[0].length - 1; i++) {
+	for (let i = 0; i < (data[0].length - 1); i++) {
 		col_widths[i] = 0;
 	}
 
 	//console.log('col_widths: ', col_widths);
 	//console.log('data:', data)
 	var message = document.getElementById("table_body").innerHTML;
-	var limit = 200 + displayedElements;
+	var limit = 20 + displayedElements;
 	var a_tag = '<a class="opener" target="_blank" rer="noopener noreferrer"href="/';
 	for (displayedElements; displayedElements < Math.min(data.length, limit); displayedElements++) {
 		message += '<tr>';
@@ -341,46 +629,13 @@ const displayElements = function (data) {
 	}
 	time = performance.now() - time;
 	console.log('FINISH:', time);
-	updatePaginator($);
+	updatePaginator($, 200, pageNumb);
 }
-
-let updatePaginator = function($, numb) {
-	// Consider adding an ID to your table
-	// incase a second table ever enters the picture.
-
-	var items = $("#table_elements tr");
-
-	var numItems = items.length;
-	var perPage = 50;
-	alert(numItems);
-	// Only show the first 2 (or first `per_page`) items initially.
-	items.slice(perPage).hide();
-
-	// Now setup the pagination using the `.pagination-page` div.
-	$(".compact-theme").pagination({
-		items: numItems,
-		itemsOnPage: perPage,
-		cssStyle: "light-theme",
-
-		// This is the actual page changing functionality.
-		onPageClick: function(pageNumber) {
-			// We need to show and hide `tr`s appropriately.
-			var showFrom = perPage * (pageNumber - 1);
-			var showTo = showFrom + perPage;
-
-			// We'll first hide everything...
-			items.hide()
-				 // ... and then only show the appropriate rows.
-				 .slice(showFrom, showTo).show();
-		}
-	});
-};
 
 $(function () {
 	let preloader = $('<div></div>');
 	preloader.addClass('preloader');
 	preloader.insertBefore($('.main_content'));
-
 
 	$("#load_items").css({'width': ($("#table_elements").width() + 'px')});
 	console.log('window location:', window.location)
@@ -589,22 +844,17 @@ $(function () {
 		});
 	}
 
-
-
-
     $(window).resize(function() {
 		$("#load_items").css({
         	'width': ($("#table_elements").width() + 'px')
 		});
 	});
 	
-	
 	document.getElementById("table_body").innerHTML = "";
 	$('.back_to_top').on('click', function () {
 		$('#sticky_div').css('top', 0);
 		$('html, body').animate({scrollTop:0}, 'fast');
 	})
-
 
 	$(window).on('scroll', function () {
 		var scroll = $(window).scrollTop();	
@@ -638,8 +888,6 @@ $(function () {
         }
 	});
 
-
-
 	$('#load_items').on('click', function() {
 		$(this).css('display', 'none');
 		let load_preloader = $('<div></div>');
@@ -658,286 +906,14 @@ $(function () {
 		})
 	});
 
-
-
 	$('#stat_show_button').on('click', function (e) {
 		e.preventDefault();
-		displayedElements = 0;
-		let getText = '';
-		
-		let filters = $(".filter_select");
-
-
-		for (let i = 0; i < filters.length; i++) {
-			let checkedBoxes = filters[i].querySelectorAll('.inp_label:checked');
-			if (checkedBoxes != undefined && checkedBoxes.length != 0) {
-				if (checkedBoxes[0].getAttribute("type") == "radio") {
-					if (checkedBoxes[0].value != "none") {
-						getText += filters[i].id.split('_')[1] + '=';
-						getText += checkedBoxes[0].value;
-
-						if (i != filters.length - 1) {
-							getText += '&';
-						}
-					}
-
-					continue;
-				}
-				
-				let code = filters[i].id.split('_')[1];
-				// console.log(code);
-				if (code.substring(0, 1) === "i") {
-					code = 'filter=' + code + ':';
-					getText += code;
-					//console.log(code);
-					for (var j = 0; j < checkedBoxes.length; j++) {
-						// console.log(checkedBoxes[j]);
-						getText += checkedBoxes[j].value;
-						//console.log(getText);
-						//console.log('checkboxed[j].value: ', checkedBoxes[j].value)
-						if (j != checkedBoxes.length - 1) {
-							getText += ',';
-						}
-					}
-					// if (i != filters.length - 1) {
-						
-					// }
-				}
-				else {
-					code = code + '=';
-
-					getText += code;
-					for (let j = 0; j < checkedBoxes.length; j++) {
-						getText += checkedBoxes[j].value;
-						if (j != checkedBoxes.length - 1) {
-							getText += '&' + code;
-						}
-					}
-					// if (i != filters.length - 1) {
-					// 	getText += '&';
-					// }
-				}
-
-				getText += '&';
-			}
-		}
-		
-
-		for (let i = 0; i < filters.length; i++) {
-			let inputBoxes = filters[i].querySelectorAll('.num_inp');
-
-			if (inputBoxes.length != 0) {
-				let code = inputBoxes[0].id.split('_')[0];
-				let processed_min = inputBoxes[0].value.trim().replace(/\s+/g, ' ').replace(',', '.');
-				let processed_max = inputBoxes[1].value.trim().replace(/\s+/g, ' ').replace(',', '.');
-
-				let min_unit_index = processed_min.search(/[a-zA-Zа-яА-Я]/);
-				let max_unit_index = processed_max.search(/[a-zA-Zа-яА-Я]/);
-
-				let float_min, float_max, unit_min, unit_max;
-
-				if (min_unit_index === -1) {
-					float_min = parseFloat(processed_min);
-				}
-				else {
-					float_min = parseFloat(processed_min.slice(0, min_unit_index));
-					// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
-					unit_min = processed_min.slice(min_unit_index).split(' ')[0];
-				}
-
-
-				if (max_unit_index === -1) {
-					float_max = parseFloat(processed_max);
-				}
-				else {
-					float_max = parseFloat(processed_max.slice(0, max_unit_index));
-					// если будет несколько слов, разделенных пробелом, то split возьмет первое слово
-					unit_max = processed_max.slice(max_unit_index).split(' ')[0];
-				}
-
-				if (code.substring(0, 1) === "o" || code.substring(0, 1) === "r") {
-					if (isNaN(float_min) === true && isNaN(float_max) === true) {
-						inputBoxes[0].value = '';
-						inputBoxes[1].value = '';
-						continue;
-					}
-					// console.log(html_parameters);
-					// console.log(code);
-					
-					console.log('html_parameters: ', html_parameters);
-					console.log('code: ', code);
-					console.log(html_parameters[code])
-
-					if (html_parameters[code] === undefined) {
-						if (code.slice(0, 1) === 'r') {
-							// иногда коды r[id] конвертируются в o[id] и наоборот
-							// лучше посмотреть сообщение по проекту в вк за 20 августа
-							code = code.replace('r', 'o');
-						}
-						else if (code.slice(0, 1) === 'o') {
-							code = code.replace('o', 'r');
-						}
-						else {
-							console.log('\nReally weird thing happened');
-							continue;
-						}
-					} 
-					let par_name = html_parameters[code]["Short"];
-					let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
-					console.log('par_name', par_name)
-					let cur_units = html_parameters[code]["Units"];
-
-					// console.log(par_name);
-					// console.log(cur_units);
-
-					console.log('unit_min: ', unit_min)
-
-					let unit_for_min = false;
-					for (let unit of cur_units) {
-						if (unit["Name"] == unit_min) {
-							inputBoxes[0].value = float_min + ' ' + unit_min;
-							float_min = float_min * unit["Multiplier"];
-							unit_for_min = true;
-						}
-					}
-		
-					if (unit_for_min !== true) {
-						let pair = composeInputField(float_min, unit_min, html_parameters[code]["DefaultMultiplier"])
-						console.log('\npair: ', pair)
-						inputBoxes[0].value = pair[0];
-						float_min = pair[1];
-					}
-
-
-					let unit_for_max = false;
-					for (let unit of cur_units) {
-						if (unit["Name"] == unit_max) {
-							inputBoxes[1].value = float_max + ' ' + unit_max;
-							float_max = float_max * unit["Multiplier"];
-							unit_for_max = true;
-						}
-					}
-
-					if (unit_for_max !== true) {
-						let pair = composeInputField(float_max, unit_max, html_parameters[code]["DefaultMultiplier"])
-						inputBoxes[1].value = pair[0];
-						float_max = pair[1];
-					}
-
-
-					if (isNaN(float_min) == true) { inputBoxes[0].value = ''; }
-					if (isNaN(float_max) == true) { inputBoxes[1].value = ''; }
-
-
-					if (code.substring(0, 1) === "o" && filters[i].querySelector('.incl_inp').checked == false) {
-						code = code.replace('o', 'r');
-					}
-
-					code = 'filter=' +  code;
-					getText += code + ':';
-
-					if (!isNaN(float_min)) {
-						getText += parseFloat(parseFloat(float_min).toFixed(12)) + '~';
-						if (!isNaN(float_max)) {
-							getText += parseFloat(parseFloat(float_max).toFixed(12));
-						}
-					}
-					else {
-						getText += '~' + parseFloat(parseFloat(float_max).toFixed(12));
-					}
-					if (i != filters.length - 1) {
-						getText += '&';
-					}
-				}
-				else {
-					if (isNaN(float_min) == true && isNaN(float_max) == true) {
-						inputBoxes[0].value = '';
-						inputBoxes[1].value = '';
-						continue;
-					}
-
-
-					if (isNaN(float_min) == true) { inputBoxes[0].value = ''; }
-					if (isNaN(float_max) == true) { inputBoxes[1].value = ''; }
-					
-
-					if (!isNaN(float_min)) {
-						getText += `Min${code}=${float_min}`;
-						if (!isNaN(float_max)) {
-							getText += `&Max${code}=${float_max}`;
-						}
-					}
-					else {
-						getText += `Max${code}=${float_max}`;
-					}
-
-					if (i != filters.length - 1) {
-						getText += '&';
-					}
-				}
-
-				// console.log(code.slice(0, -1));
-			}
-		}
-
-
-		if (getText.slice(-1) == '&') {
-			getText = getText.slice(0, -1);
-		}
-		console.log('getText: ', getText);
-
-
-		$('#show_box').css('display', 'none');
-
-		if (getText == '') {
-			window.history.pushState(null, null, window.location.pathname);
-		}
-		else {
-			window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(getText).replaceAll('%26', '&').replaceAll('%3D', '='));
-		}
-
-		document.getElementById("table_body").innerHTML = "";
-		console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
-
-		let url_search = window.location.search;
-		console.log('url:    ', url_search);
-		if (url_search != '') {
-			console.log('here: ', url_search);
-			fetch('/catget' + url_search)
-			.then(res => res.json())
-			.then(data => {
-				displayElements(data[0]); 
-				html_parameters = data[1];
-				console.log('\nhtml_parameters:\n', html_parameters)
-				changeValuesState(html_parameters);
-
-				$("#load_items").css({
-					'width': ($("#table_elements").width() + 'px')
-				});
-			});
-		} else {
-			console.log('here:');
-			fetch('/catget')
-			.then(res => res.json())
-			.then(data => {
-				displayElements(data[0]);
-				html_parameters = data[1];
-				console.log('\nhtml_parameters:\n', html_parameters)
-				changeValuesState(html_parameters);
-
-				$("#load_items").css({
-					'width': ($("#table_elements").width() + 'px')
-				});
-			});
-		}
+		displayWithFilters(0);
 	});
-
-
 
 	$('#show_button').on('click', function () {
 		$('#stat_show_button').trigger('click');
 	});
-
 
 	$('.inp_label[type=radio]').on('change', function () {
 		// console.log('click')
@@ -954,7 +930,6 @@ $(function () {
 		$('#show_box').css('display', 'block');
 		$('#show_box').css('top', elem.offset().top - 15);
 	});
-
 
 	$('.inp_label[type=checkbox]').on('change', function () {
 		// console.log('click')
@@ -974,8 +949,6 @@ $(function () {
 		// console.log("countClicked: ", countClicked)
 	});
 
-
-
 	$('#search_form span').on('click', function(event) {
 		if (searchClicked == true) {			
 			document.getElementById("table_body").innerHTML = "";
@@ -987,13 +960,10 @@ $(function () {
 		document.getElementById("element_search_bar").disabled = false;
 	});
 
-
-
 	$('#search_form').on('submit', function(event) {
 		event.preventDefault();
 		$('#element_search').trigger('click');
 	});
-
 
 	$('#element_search').on('click', function () {	
 		displayedElements = 0;
@@ -1026,14 +996,7 @@ $(function () {
 		// }
 	});
 
-
-
-
-
-
-
 	$('#reset_button').on('click', function () {
-
 		var checked_boxes = $("input:checkbox:checked");
 		var input_boxes = $("input[type=text]");
 		var warnboxes = $('.warn_box');
@@ -1054,16 +1017,13 @@ $(function () {
 			checked_boxes[i].closest('label').classList.remove('filt_label_checked');
 		}
 
-
 		for (let i = 0; i < input_boxes.length; i++) {
 			input_boxes[i].value = "";
 		}
 
-
 		for (let i = 0; i < warnboxes.length; i++) {
 			warnboxes.eq(i).stop(true, true).hide(); 
 		}
-
 
 		for (let i = 0; i < warninps.length; i++) {
 			warninps.eq(i).removeClass('warn_inp');
@@ -1090,9 +1050,6 @@ $(function () {
 		console.log();
 	});
 
-
-
-
 	$('.filter_select > button').on('click', function () {
 		var elem = $(this);
 		var filt_select = elem.closest('.filter_select');
@@ -1110,7 +1067,6 @@ $(function () {
 		elem.next().hide();	
 	});
 
-
 	$('.num_inp').on('keypress', function(event) {
 		if (event.key == '%') {
 			return false;
@@ -1118,7 +1074,6 @@ $(function () {
 		// event.preventDefault();
 		// console.log(event.keyCode)
 	});
-
 
 	$('.num_inp').on('input', function () {	
 		var elem = $(this)
@@ -1135,8 +1090,6 @@ $(function () {
 		$('#show_box').css('display', 'block');
 	});
 
-
-
 	$('.num_inp').on('paste', function (event) {
 		//var prev_val = $(this)[0].value;
 		// var pasted_text = event.originalEvent.clipboardData.getData('text');
@@ -1144,20 +1097,15 @@ $(function () {
 		// return pasted_text
 	});
 
-
 	$('.incl_inp').on('click', function () {
 		var elem = $(this);
 		$('#show_box').css('top', elem.offset().top - 4);
 		$('#show_box').css('display', 'block');
 	});
 
-
 	$('#show_box_close').on('click', function () {
 		$('#show_box').css('display', 'none');
 	});
-
-
-
 
 	$('.dropdown_header').on('click', function () {
 		var elem = $(this);
