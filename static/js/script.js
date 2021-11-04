@@ -1,12 +1,14 @@
 "use strict";
 
+var cachedData;
+
+var currentPage = 0;
 
 const char_width = {
 	'0': 8.16576, " ": 0, " ": 4.07609, '1': 8.16576, '2': 8.16576, '3': 8.16576, '4': 8.16576, '5': 8.16576, '6': 8.16576, '7': 8.16576, '8': 8.16576, '9': 8.16576, "!": 4.07609, '"': 5.21739, '#': 8.16576, '$': 8.16576, '%': 13.0435, '&': 9.78261, "'": 2.8125, '(': 4.8913, ')': 4.8913, '*': 5.70652, '+': 8.57337, ',': 4.07609, '-': 4.8913, '.': 4.07609, '/': 4.07609, ':': 4.07609, ';': 4.07609, '<': 8.57337, '=': 8.57337, '>': 8.57337, '?': 8.16576, '@': 14.8913, 'A': 9.78261, 'B': 9.78261, 'C': 10.5978, 'D': 10.5978, 'E': 9.78261, 'F': 8.96739, 'G': 11.413, 'H': 10.5978, 'I': 4.07609, 'J': 7.33696, 'K': 9.78261, 'L': 8.16576, 'M': 12.2147, 'N': 10.5978, 'O': 11.413, 'P': 9.78261, 'Q': 11.413, 'R': 10.5978, 'S': 9.78261, 'T': 8.96739, 'U': 10.5978, 'V': 9.78261, 'W': 13.8451, 'X': 9.78261, 'Y': 9.78261, 'Z': 8.96739, '[': 4.07609, "\\": 4.07609, ']': 4.07609, '^': 6.88859, '`': 4.8913, 'a': 8.16576, 'b': 8.16576, 'c': 7.33696, 'd': 8.16576, 'e': 8.16576, 'f': 4.07609, 'g': 8.16576, 'h': 8.16576, 'i': 3.26087, 'j': 3.26087, 'k': 7.33696, 'l': 3.26087, 'm': 12.2147, 'n': 8.16576, 'o': 8.16576, 'p': 8.16576, 'q': 8.16576, 'r': 4.8913, 's': 7.33696, 't': 4.07609, 'u': 8.16576, 'v': 7.33696, 'w': 10.5978, 'x': 7.33696, 'y': 7.33696, 'z': 7.33696, '{': 4.90489, '|': 3.81793, '}': 4.90489, '~': 8.57337, '': 7.82609, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '': 11.0054, '¡': 4.8913, '¢': 8.16576, '£': 8.16576, '¤': 8.16576, '¥': 8.16576, '¦': 3.81793, '§': 8.16576, '¨': 4.8913, '©': 10.8152, 'ª': 5.43478, '«': 8.16576, '¬': 8.57337, '®': 10.8152, '¯': 8.09783, '°': 5.86957, '±': 8.05707, '²': 4.8913, '³': 4.8913, '´': 4.8913, 'µ': 8.45109, '¶': 7.88043, '·': 4.8913, '¸': 4.8913, '¹': 4.8913, 'º': 5.36685, '»': 8.16576, '¼': 12.2283, '½': 12.2283, '¾': 12.2283, 'А': 9.78261, 'Б': 9.63315, 'В': 9.78261, 'Г': 7.94837, 'Д': 9.93207, 'Е': 9.78261, 'Ж': 13.5462, 'З': 8.8587, 'И': 10.5435, 'Й': 10.5435, 'К': 8.5462, 'Л': 9.63315, 'М': 12.2147, 'Н': 10.5978, 'О': 11.413, 'П': 10.5435, 'Р': 9.78261, 'С': 10.5978, 'Т': 8.96739, 'У': 9.32065, 'Ф': 11.1549, 'Х': 9.78261, 'Ц': 10.856, 'Ч': 9.78261, 'Ш': 13.4375, 'Щ': 13.75, 'Ъ': 11.6168, 'Ы': 12.9891, 'Ь': 9.63315, 'Э': 10.5435, 'Ю': 14.8234, 'Я': 10.5978, 'а': 8.16576, 'б': 8.41033, 'в': 7.79891, 'г': 5.35326, 'д': 8.55978, 'е': 8.16576, 'ж': 9.80978, 'з': 6.72554, 'и': 8.19293, 'й': 8.19293, 'к': 6.42663, 'л': 8.55978, 'м': 10.0815, 'н': 8.09783, 'о': 8.16576, 'п': 7.94837, 'р': 8.16576, 'с': 7.33696, 'т': 6.72554, 'у': 7.33696, 'ф': 12.0652, 'х': 7.33696, 'ц': 8.41033, 'ч': 7.64946, 'ш': 11.7663, 'щ': 12.0652, 'ъ': 9.1712, 'ы': 10.5435, 'ь': 7.64946, 'э': 7.48641, 'ю': 11.0054, 'я': 7.94837, '_': 8.16576
 }
 
 
-var displayedElements = 0;
 var countClicked = 0;
 var countFiltered = 0;
 var searchClicked = false;
@@ -463,16 +465,19 @@ String.prototype.width = function() {
 const displayElements = function (data) {
 	console.log('START display')
 	let time = performance.now();
-	console.log('displayedElements: ', displayedElements);
+	console.log('Data length: ' + data.length);
 	let col_widths = [];
 	//console.log(data[0].length);
+	for (let i = 0; i < (data[0].length - 1); i++) {
+		col_widths[i] = 0;
+	}
 
 	//console.log('col_widths: ', col_widths);
 	//console.log('data:', data)
+	document.getElementById("table_body").innerHTML = '';
 	let message = '';
-	let limit = 200;
-	let a_tag = '<a class="opener" target="_blank" rer="noopener noreferrer"href="/';
-	for (displayedElements; displayedElements < Math.min(data.length, limit); displayedElements++) {
+	var a_tag = '<a class="opener" target="_blank" rer="noopener noreferrer"href="/';
+	for (let displayedElements = 0; displayedElements < data.length; displayedElements++) {
 		message += '<tr>';
 		for (var j = 1; j < data[displayedElements].length; j++) { // проходим по всем параметрам элемента кроме статуса
 			message += '<td>';
@@ -583,24 +588,43 @@ const displayElements = function (data) {
 	$('.main_content').css('display', 'block');
 
 	document.getElementById("table_body").innerHTML = message;
-	if (data.length) {
-		document.getElementById("number_of_displayed_elements").innerHTML = 'Найдено элементов: ' + data.length;
+	if (cachedData.length > 0) {
+		document.getElementById("number_of_displayed_elements").innerHTML = 'Найдено элементов: ' + cachedData.length;
 	}
 	else {
 		document.getElementById("number_of_displayed_elements").innerHTML = 'Не найдено элементов, удовлетворяющих указанному запросу';
 	}
-	if (displayedElements == data.length) {
-		$('#load_items').css('display', 'none');
-	}
-	else {
-		$('#load_items').css('display', 'block');
-	}
 	time = performance.now() - time;
 	console.log('FINISH:', time);
-
 }
 
+let updatePaginator = function($, numb) {
+	// Consider adding an ID to your table
+	// incase a second table ever enters the picture.
 
+	var numItems = numb;
+	var perPage = 20;
+
+	// Now setup the pagination using the `.pagination-page` div.
+	$(".compact-theme").pagination({
+		prevText: '🡠',
+		nextText: '🡢',
+		items: numItems,
+		itemsOnPage: perPage,
+		cssStyle: "compact-theme",
+
+		// This is the actual page changing functionality.
+		onPageClick: function(pageNumber) {
+			var showFrom = perPage * (pageNumber - 1);
+			var showTo = showFrom + perPage;
+
+			console.log(cachedData.slice(showFrom, showTo)[0]);
+
+			// We'll first hide everything...
+			displayElements(cachedData.slice(showFrom, showTo));
+		}
+	});
+};
 
 $(function () {
 	let preloader = $('<div></div>');
@@ -619,7 +643,10 @@ $(function () {
 		fetch('/catget' + url_search)
 		.then(res => res.json())
 		.then(data => {
-			displayElements(data[0]); 
+			cachedData = data[0];
+			updatePaginator($, cachedData.length);
+			displayElements(data[0].slice(0,20));
+
 			html_parameters = data[1];
 
 			$("#load_items").css({
@@ -801,7 +828,9 @@ $(function () {
 			// console.log('START display')
 			// var time1 = performance.now();
 
-			displayElements(data[0]);
+			cachedData = data[0];
+			updatePaginator($, cachedData.length);
+			displayElements(data[0].slice(0,20));
 
 			// var time2 = performance.now() - time1;
 			// console.log('FINISH display: ', time2);
@@ -881,7 +910,10 @@ $(function () {
 		fetch('/catget')
 		.then(res => res.json())
 		.then(data => {
-			displayElements(data[0]); 
+			cachedData = data[0];
+			updatePaginator($, cachedData.length);
+			displayElements(data[0].slice(0,20));
+
 			html_parameters = data[1];
 
 			$(this).css({
@@ -895,7 +927,6 @@ $(function () {
 	$('#stat_show_button').on('click', function (e) {
 		filterPreloader();
 		e.preventDefault();
-		displayedElements = 0;
 		
 		let getText = composeURL();
 
@@ -918,7 +949,10 @@ $(function () {
 			fetch('/catget' + url_search)
 			.then(res => res.json())
 			.then(data => {
-				displayElements(data[0]); 
+				cachedData = data[0];
+				updatePaginator($, cachedData.length);
+				displayElements(data[0].slice(0,20));
+
 				html_parameters = data[1];
 				console.log('\nhtml_parameters:\n', html_parameters)
 				changeValuesState(html_parameters);
@@ -932,7 +966,10 @@ $(function () {
 			fetch('/catget')
 			.then(res => res.json())
 			.then(data => {
-				displayElements(data[0]);
+				cachedData = data[0];
+				updatePaginator($, cachedData.length);
+				displayElements(data[0].slice(0,20));
+
 				html_parameters = data[1];
 				console.log('\nhtml_parameters:\n', html_parameters)
 				changeValuesState(html_parameters);
@@ -959,8 +996,6 @@ $(function () {
 
 
 	$('.search_lupe').on('click', function () {
-		displayedElements = 0;
-
 		let url_search = '';
 		let elem = this;
 		let input_field = document.querySelector('#element_search_bar');
@@ -1016,7 +1051,10 @@ $(function () {
 		fetch('/catget' + url_search)
 		.then(res => res.json())
 		.then(data => {
-			displayElements(data[0]);
+			cachedData = data[0];
+			updatePaginator($, cachedData.length);
+			displayElements(data[0].slice(0,20));
+
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
 		});
@@ -1064,7 +1102,6 @@ $(function () {
 	$('#search_form span').on('click', function(event) {
 		if (searchClicked == true) {			
 			document.getElementById("table_body").innerHTML = "";
-			displayedElements = 0;
 			displayFiltered(filtered);
 		}
 		searchClicked = false;
@@ -1081,9 +1118,6 @@ $(function () {
 
 
 	$('#element_search').on('click', function () {	
-		displayedElements = 0;
-		
-
 		$('#element_search_bar')[0].value = $('#element_search_bar')[0].value.toLowerCase().trim();
 		var search_value = $('#element_search_bar')[0].value.toLowerCase().trim();
 		if (search_value) {
@@ -1111,12 +1145,6 @@ $(function () {
 		// }
 	});
 
-
-
-
-
-
-
 	$('#reset_button').on('click', function () {
 		filterPreloader();
 		let checked_boxes = $("input:checkbox:checked");
@@ -1127,7 +1155,6 @@ $(function () {
 
 		searchClicked = false; // redundant
 
-		displayedElements = 0;
 		document.getElementById("table_body").innerHTML = "";
 		
 		$('#element_search_bar')[0].value = "";
@@ -1165,7 +1192,10 @@ $(function () {
 		fetch('/catget')
 		.then(res => res.json())
 		.then(data => {
-			displayElements(data[0]);
+			cachedData = data[0];
+			updatePaginator($, cachedData.length);
+			displayElements(data[0].slice(0,20));
+
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
 
