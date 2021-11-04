@@ -467,11 +467,7 @@ const displayElements = function (data) {
 	let time = performance.now();
 	console.log('Data length: ' + data.length);
 	let col_widths = [];
-	//console.log(data[0].length);
-	for (let i = 0; i < (data[0].length - 1); i++) {
-		col_widths[i] = 0;
-	}
-
+	
 	//console.log('col_widths: ', col_widths);
 	//console.log('data:', data)
 	document.getElementById("table_body").innerHTML = '';
