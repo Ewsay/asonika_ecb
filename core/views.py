@@ -5,8 +5,8 @@ from random import randint, random
 from urllib.parse import unquote
 
 from django.db.models import Q
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse, FileResponse, Http404
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
@@ -35,24 +35,48 @@ def get_home_tree(request):
 from django.urls import resolve
 
 
-def get_info(request):
+def get_info(request, column_id, parameter_id):
     template_name = 'core/info.html'
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = str(request.GET.items())
+    info = requests.get(f'https://localhost:5001/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', data=request.GET, verify=False)
     return render(
             request,
             template_name,
             {
-                'info': info
+                'info': info.text
             }
         )
 
+def get_mnfs(request, mnf_id):
+    template_name = 'core/mnfs.html'
+    # parent_id = request.GET[]
+    # item_id = request.GET[]
+    # info = get_right_html(1, 1)
+    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
+    return redirect(f'https://localhost:5001/api/company/{mnf_id}')
 
-def get_right_html(parent_id, item_id):
-    return "ooo"
+def get_tus(request, tu_id):
+    template_name = 'core/tus.html'
+    # parent_id = request.GET[]
+    # item_id = request.GET[]
+    # info = get_right_html(1, 1)
+    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
+    return render(
+            request,
+            template_name,
+            {
+                'info': info.text
+            }
+        )
 
+def get_doc(request, tu_doc):
+    path_to_file = os.path.abspath(os.path.dirname(__file__)) + '/docs/' + tu_doc
+    try:
+        return FileResponse(open(path_to_file, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
 
 # обработчик для моего запроса элементов категории из js
 def get_category_data(request):
@@ -325,7 +349,11 @@ def get_elements_from_json(data):
             if tu_id in [tu["item"]["Id"] for tu in data["tus"]]:
                 for tu in data["tus"]:
                     if tu["item"]["Id"] == tu_id:
-                        tu_arr.append([tu["item"]["Name"], tu["item"]["DocLink"]])
+                        if tu["item"]["DocLink"] == "":
+                            tu_arr.append([tu["item"]["Name"]])
+                        else:
+                            link_to_file = 'docs/' + tu["item"]["DocLink"]
+                            tu_arr.append([tu["item"]["Name"], link_to_file])
             else:
                 tu_arr.append(["-", ''])
         elem.append(tu_arr)
@@ -335,7 +363,7 @@ def get_elements_from_json(data):
         if mnf_id in [mnf["item"]["Id"] for mnf in data["mnfs"]]:
             for mnf in data["mnfs"]:
                 if mnf["item"]["Id"] == mnf_id:
-                    elem.append([[mnf["item"]["Name"]]])
+                    elem.append([[mnf["item"]["Name"], f'mnfs/{mnf_id}']])
         else:
             elem.append([["-"]])
         if ekb["Popularity"]["UsedInProducts"] != 0:
@@ -351,7 +379,10 @@ def get_elements_from_json(data):
                         val_id = possible_val["Val"]["Id"]
                         for val in column["item"]["Values"]:
                             if val["item"]["Id"] == val_id:
-                                elem_column.append([val["item"]["Name"]])
+                                if (val["item"]["HasDescription"] is True):
+                                    elem_column.append([val["item"]["Name"], f'info/{column_id}/{val_id}'])
+                                else:
+                                    elem_column.append([val["item"]["Name"]])
                     elif "r_val" in possible_val["$type"]:
                         min_val = in_right_unit(possible_val["MinVal"], column["item"])
                         max_val = in_right_unit(possible_val["MaxVal"], column["item"])
@@ -591,14 +622,6 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
 
             <div id=number_of_displayed_elements></div>
 
-            <div id="search_tab">
-                <form id="search_form">
-                  <input name="sq" id="element_search_bar" type="text" placeholder="Поиск по названию">
-                  <span></span>
-                  <button id="element_search" type="submit" title="Начать поиск элементов">Найти</button>
-
-                </form>
-            </div>
           </div>
 
 
@@ -606,7 +629,10 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
             <div class="filters_and_elements">
 
               <div id="filters">
-              <form id="filterform" method="get">
+              <div id="filterform">
+                <div class="search_div"><input name="search" id="element_search_bar" type="text" placeholder="Поиск по названию">
+    	            <svg class="search_lupe" data-search="0"></svg> 
+                </div>
     '''
 
     for i in range(len(parameters)):
@@ -680,9 +706,9 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
     # colgroup += '</colgroup>'
 
     html_text += f'''
-                    </form>
+                    </div>
                     <div id="stat_show_box">
-                  <button form="filterform" id="stat_show_button">Применить</button>
+                  <button id="stat_show_button">Применить</button>
                 </div>
               </div> <!-- End of filters div -->  
 
