@@ -467,7 +467,7 @@ const displayElements = function (data) {
 	let time = performance.now();
 	console.log('Data length: ' + data.length);
 	let col_widths = [];
-	
+
 	//console.log('col_widths: ', col_widths);
 	//console.log('data:', data)
 	document.getElementById("table_body").innerHTML = '';
@@ -599,7 +599,7 @@ let updatePaginator = function($, numb) {
 	// incase a second table ever enters the picture.
 
 	var numItems = numb;
-	var perPage = 20;
+	var perPage = 10;
 
 	// Now setup the pagination using the `.pagination-page` div.
 	$(".compact-theme").pagination({
@@ -641,7 +641,7 @@ $(function () {
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+			displayElements(data[0].slice(0,10));
 
 			html_parameters = data[1];
 
@@ -826,7 +826,7 @@ $(function () {
 
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+			displayElements(data[0].slice(0,10));
 
 			// var time2 = performance.now() - time1;
 			// console.log('FINISH display: ', time2);
@@ -908,7 +908,7 @@ $(function () {
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+			displayElements(data[0].slice(0,10));
 
 			html_parameters = data[1];
 
@@ -947,7 +947,7 @@ $(function () {
 			.then(data => {
 				cachedData = data[0];
 				updatePaginator($, cachedData.length);
-				displayElements(data[0].slice(0,20));
+				displayElements(data[0].slice(0,10));
 
 				html_parameters = data[1];
 				console.log('\nhtml_parameters:\n', html_parameters)
@@ -964,7 +964,7 @@ $(function () {
 			.then(data => {
 				cachedData = data[0];
 				updatePaginator($, cachedData.length);
-				displayElements(data[0].slice(0,20));
+				displayElements(data[0].slice(0,10));
 
 				html_parameters = data[1];
 				console.log('\nhtml_parameters:\n', html_parameters)
@@ -1049,7 +1049,7 @@ $(function () {
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+			displayElements(data[0].slice(0,10));
 
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
@@ -1190,7 +1190,7 @@ $(function () {
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+			displayElements(data[0].slice(0,10));
 
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
