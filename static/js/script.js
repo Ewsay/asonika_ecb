@@ -27,6 +27,18 @@ const filterPreloader = function() {
 	load_preloader.insertBefore($('.main_content'));
 }
 
+const retrievePageFromURL = function(){
+	let str = window.location.href;
+	let lastInd = str.lastIndexOf('#');
+	if (lastInd != -1){
+		let pathStr = str.substring(lastInd);
+		let pageNumb = parseInt(pathStr.substring(pathStr.indexOf('-') + 1));
+		return pageNumb;
+	}
+	else{
+		return 1;
+	}
+}
 
 // создает и возвращает строку URL с выбранными фильтрами
 const composeURL = function() {
@@ -617,15 +629,16 @@ let updatePaginator = function($, numb) {
 
 	var numItems = numb;
 	var perPage = 20;
-
+	console.log("Called paginator");
 	// Now setup the pagination using the `.pagination-page` div.
 	$(".compact-theme").pagination({
 		prevText: '🡠',
 		nextText: '🡢',
 		items: numItems,
 		itemsOnPage: perPage,
+		currentPage: retrievePageFromURL(),
 		cssStyle: "compact-theme",
-
+		hrefTextPrefix: '',
 		// This is the actual page changing functionality.
 		onPageClick: function(pageNumber) {
 			var showFrom = perPage * (pageNumber - 1);
@@ -853,17 +866,9 @@ $(function () {
 	// 	console.log('HASHCHANGE this is the last url:', window.history.state);
 	// });
 
-
     $(window).on('popstate', function () {
 		resetFilterValues();
         URLValuesToInput();
-
-        let str = window.location.href;
-        // if(event.state === null) {
-
-        //    event.preventDefault();
-        //    return false;
-        // }
     });
 
 
