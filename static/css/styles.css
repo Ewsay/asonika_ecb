@@ -28,10 +28,10 @@
 }
 
 .table_size {
-	min-height: calc(85vh - 20px);
-	min-width:  calc(90vw - 20px);
-	max-height: calc(85vh - 20px);
-	max-width:  calc(90vw - 20px);
+	min-height: calc(80vh - 100px);
+	min-width:  calc(100vw - 250px);
+	max-height: calc(80vh - 100px);
+	max-width:  calc(100vw - 250px);
 }
 
 #mainmenu .nav {
@@ -153,7 +153,7 @@ input[type="search" i] {
 
 
 body {
-	overflow-y: hidden;
+	overflow: hidden;
     width: max-content;
     min-width: 100%;
     font-family: arial, helvetica,sans-serif;
@@ -166,7 +166,6 @@ body {
 	display: none;
 	margin-top: 20px;
 	padding: 0;
-	max-width: 2500px;
 	margin-left: auto;
 	margin-right: auto;
 	box-sizing: border-box;
@@ -547,6 +546,7 @@ li a:visited {
 
 
 table {
+	border-collapse: collapse;
 	z-index: 100;
 	min-width: calc(100vw - 350px);
 	table-layout: fixed;
@@ -555,6 +555,9 @@ table {
 	text-align: left;
 }
 
+table td{
+	border: 1px solid #8f8f8f;
+}
 
 #table_elements {
 	display: inline-table;
@@ -605,6 +608,13 @@ td, th {
 	border: 2px solid pink;
 }
 
+thead th { 
+	border: 1px solid #5a5a5a;
+	background: rgb(238, 238, 238);
+	z-index: 5;
+	position: sticky; 
+	top: 0; 
+}
 
 thead tr {
 	background: rgb(238, 238, 238);
@@ -1035,7 +1045,7 @@ background: #e0e0e0;
 #filterform {
     border-top: 2px solid #5a5a5a;
     direction: rtl;
-    max-height: 1000px;
+    max-height: calc(80vh - 100px);
     overflow-y: scroll;
     box-shadow: 1px 1px 2px black;
     margin-top: 0px;
