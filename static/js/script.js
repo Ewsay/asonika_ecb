@@ -128,10 +128,6 @@ const composeURL = function() {
 				}
 				// console.log(html_parameters);
 				// console.log(code);
-				
-				console.log('html_parameters: ', html_parameters);
-				console.log('code: ', code);
-				console.log(html_parameters[code])
 
 				if (html_parameters[code] === undefined) {
 					if (code.slice(0, 1) === 'r') {
@@ -149,13 +145,10 @@ const composeURL = function() {
 				} 
 				let par_name = html_parameters[code]["Short"];
 				let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
-				console.log('par_name', par_name)
 				let cur_units = html_parameters[code]["Units"];
 
 				// console.log(par_name);
 				// console.log(cur_units);
-
-				console.log('unit_min: ', unit_min)
 
 				let unit_for_min = false;
 				for (let unit of cur_units) {
@@ -168,7 +161,7 @@ const composeURL = function() {
 	
 				if (unit_for_min !== true) {
 					let pair = composeInputField(float_min, unit_min, html_parameters[code]["DefaultMultiplier"])
-					console.log('\npair: ', pair)
+					// console.log('\npair: ', pair)
 					inputBoxes[0].value = pair[0];
 					float_min = pair[1];
 				}
@@ -250,14 +243,7 @@ const composeURL = function() {
 		getText = getText.slice(0, -1);
 	}
 
-	console.log('length gettext: ', getText.length)
-	console.log('getText: ', getText);
-
-
 	let input_field = document.querySelector('#element_search_bar');
-
-	console.log('HI IM HERE');
-	console.log()
 	if (document.querySelector('.search_lupe').getAttribute('data-search') == '1') {
 		let val = input_field.value;
 		if (getText == '') {
@@ -273,13 +259,48 @@ const composeURL = function() {
 
 
 
+const resetFilterValues = function() {
+    filterPreloader();
+    let checked_boxes = $("input:checkbox:checked");
+    let input_boxes = $("input[type=text]");
+    let warnboxes = $('.warn_box');
+    let warninps = $('.warn_inp');
+    let search_input = $('#element_search_bar');
 
+    searchClicked = false; // redundant
 
+    document.getElementById("table_body").innerHTML = "";
+
+    $('#element_search_bar')[0].value = "";
+    document.getElementById("element_search_bar").disabled = false;
+
+    $('#show_box').css('display', 'none');
+
+    for (let i = 0; i < checked_boxes.length; i++) {
+        checked_boxes[i].checked = false;
+        checked_boxes[i].closest('label').classList.remove('filt_label_checked');
+    }
+
+    for (let i = 0; i < input_boxes.length; i++) {
+        input_boxes[i].value = "";
+    }
+
+    for (let i = 0; i < warnboxes.length; i++) {
+        warnboxes.eq(i).stop(true, true).hide();
+    }
+
+    for (let i = 0; i < warninps.length; i++) {
+        warninps.eq(i).removeClass('warn_inp');
+    }
+
+    search_input.prop('disabled', false);
+    document.querySelector('.search_lupe').setAttribute('data-search', '0');
+}
 
 
 // берет значения диапазонных парамтеров из URL и переносит
 // их с нужными единицами измерения в соответствующие input поля
-const URLValueToInput = function(value, parameter_info) {
+const convertURLRangeValue = function(value, parameter_info) {
 	// добавляет единицу измерения, если она не стоит по умолчанию
 	function appendUnit(value, current_unit, current_multiplier, default_multiplier) {
 		if (current_multiplier == default_multiplier) {
@@ -379,14 +400,14 @@ const changeValuesState = function(html_parameters) {
 								// console.log("curr_input.prop('checked') == true) for: ", curr_input);
 							}
 						}
-					}		
+					}
 				}
 			}
 		}
 		else {
 			// берем все диапазонные input текущего фильтрбокса
 			let range_inputs = Array.from(filterbox.find('.num_inp'));
-			
+
 			if (desc['Enabled'] === 'true') {
 				for (let i = 0; i < range_inputs.length; i++) {
 					range_inputs[i].disabled = false;
@@ -463,9 +484,9 @@ String.prototype.width = function() {
 
 
 const displayElements = function (data) {
-	console.log('START display')
+//	console.log('START display')
 	let time = performance.now();
-	console.log('Data length: ' + data.length);
+//	console.log('Data length: ' + data.length);
 	let col_widths = [];
 
 	//console.log('col_widths: ', col_widths);
@@ -497,7 +518,7 @@ const displayElements = function (data) {
 				}
 
 				switch (status_pars[1]) {
-					case 0:	
+					case 0:
 						title_text += 'Включён в МОП';
 						break;
 					case 1:
@@ -515,9 +536,7 @@ const displayElements = function (data) {
 					default:
 						break;
 				}
-				// console.log('class_text: ', class_text)
-				// console.log('title_text: ', title_text)
-				
+
 				if (class_text != '') {
 					message += `<span class="${class_text}" title="${title_text}">`;
 				}
@@ -526,11 +545,11 @@ const displayElements = function (data) {
 				}
 				// message += ' class="irrelevant" title="Неперспективный\n">'
 			}
-			
+
 
 			for (var k = 0; k < data[displayedElements][j].length; k++) {
-				// console.log(data[displayedElements][j][k][0])			
-				
+				// console.log(data[displayedElements][j][k][0])
+
 				//console.log('col_widths[j-1].length:', col_widths[j-1].length, '   data[displayedElements][j][k][0]):', data[displayedElements][j][k][0])
 				if (col_widths[j-1] < data[displayedElements][j][k][0].width()) {
 					col_widths[j-1] = data[displayedElements][j][k][0].width();
@@ -539,8 +558,6 @@ const displayElements = function (data) {
 				var link = data[displayedElements][j][k][1];
 				var cur_val = data[displayedElements][j][k][0];
 				if (link != undefined && link != '') {
-
-					// console.log(`${a_tag + link}"`)
 					message += `${a_tag + link}">` + cur_val + '</a>';
 				}
 				else {
@@ -590,8 +607,8 @@ const displayElements = function (data) {
 	else {
 		document.getElementById("number_of_displayed_elements").innerHTML = 'Не найдено элементов, удовлетворяющих указанному запросу';
 	}
-	time = performance.now() - time;
-	console.log('FINISH:', time);
+//	time = performance.now() - time;
+//	console.log('FINISH:', time);
 }
 
 let updatePaginator = function($, numb) {
@@ -599,7 +616,7 @@ let updatePaginator = function($, numb) {
 	// incase a second table ever enters the picture.
 
 	var numItems = numb;
-	var perPage = 10;
+	var perPage = 20;
 
 	// Now setup the pagination using the `.pagination-page` div.
 	$(".compact-theme").pagination({
@@ -613,7 +630,6 @@ let updatePaginator = function($, numb) {
 		onPageClick: function(pageNumber) {
 			var showFrom = perPage * (pageNumber - 1);
 			var showTo = showFrom + perPage;
-
 			console.log(cachedData.slice(showFrom, showTo)[0]);
 
 			// We'll first hide everything...
@@ -622,260 +638,251 @@ let updatePaginator = function($, numb) {
 	});
 };
 
+
+const URLValuesToInput = function() {
+    let url_search = window.location.search;
+//    console.log('url_search: ', url_search)
+//    console.log('decode:     ', decodeURIComponent(url_search))
+    if (url_search != '') {
+        fetch('/catget' + url_search)
+        .then(res => res.json())
+        .then(data => {
+            cachedData = data[0];
+            updatePaginator($, cachedData.length);
+            displayElements(data[0].slice(0,20));
+
+            html_parameters = data[1];
+            changeValuesState(html_parameters);
+
+            // разделяем каждый фильтр в адресной строке
+            let query_values = decodeURIComponent(window.location.search.substring(1)).split('&');
+
+            // console.log('\nQUERY DESTRUCTURING:\n')
+            // console.log(query_values);
+
+            let actualIncluded = false;
+            if (query_values.length === 0) {
+                console.log('\n\nНе думал, что этот вывод может произойти\n')
+            }
+            else {
+            // Нужно будет отдельно обработать значение для search из URL
+                for (let i = 0; i < query_values.length; i++) {
+                    // console.log(query_values[i]);
+                    // console.log(query_values[i].split('='));
+                    let code_and_vals = query_values[i].split('=');
+
+                    if (code_and_vals[0] === 'filter') {
+                        code_and_vals = code_and_vals[1].split(':');
+                        let code = code_and_vals[0];
+                        let value = code_and_vals[1];
+
+                        if (code_and_vals[0].substring(0, 1) === 'i') {
+                            let values = code_and_vals[1].split(',');
+                            // console.log('Code: ', code, '\tValues: ', values);
+                            // console.log(values);
+
+                            let inputs = $('#filter_' + code).find('.inp_label');
+
+                            for (let j = 0; j < inputs.length; j++) {
+                                // console.log('\nVALUES: ', values);
+                                if (values.length === 0) {
+                                    break;
+                                }
+
+                                for (let k = 0; k < values.length; k++) {
+                                    if (inputs[j].value === values[k]) {
+                                        inputs[j].checked = true;
+                                        values.splice(k, 1);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            let values = code_and_vals[1].split('~');
+                            // console.log('Code: ', code, '\tValues: ', values);
+                            // console.log(values);
+                            // console.log('here' + code);
+                            // console.log(document.getElementById('filter_' + code));
+                            // console.log('warning\n:', $('#filter_' + code))
+
+                            let first_letter = code.substring(0, 1);
+                            let inputs = $('#filter_' + code).find('.num_inp');
+                            let inclusion_input = $('#filter_' + code).find('incl_inp');
+
+                            if (first_letter === 'r') {
+                                // иногда коды r[id] конвертируются в o[id] и наоборот
+                                // лучше посмотреть сообщение по проекту в вк за 20 августа
+                                inputs = inputs.length ? inputs : $('#filter_' + code.replace('r', 'o')).find('.num_inp');
+
+                                if (inclusion_input.length !== 0) {
+                                    inclusion_input.checked = false;
+                                }
+                            }
+                            else if (first_letter === 'o') {
+                                inputs = inputs.length ? inputs : $('#filter_' + code.replace('o', 'r')).find('.num_inp');
+
+                                if (inclusion_input.length !== 0) {
+                                    inclusion_input.checked = true;
+                                    inclusion_input.disabled = false;
+                                }
+                            }
+
+                            if (inputs.length === 0) {
+                                break;
+                            }
+
+                            // если запрос для текущего параметра
+                            // корретный, то убирает disabled с полей ввода
+
+                            if (values[0] != "") {
+                                // следующая строка лишняя, в url пробелы заменяются на %20
+                                let proccesed_min = values[0].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
+
+                                if (isNaN(parseFloat(proccesed_min[0]))) {
+                                    inputs[0].value = '';
+                                }
+                                else {
+                                    inputs[0].value = convertURLRangeValue(values[0], html_parameters[code]);
+                                    inputs[0].disabled = false;
+                                }
+                            }
+                            else {
+                                inputs[0].value = '';
+                            }
+
+
+                            if (values[1] != "") {
+                                // следующая строка лишняя, в url пробелы заменяются на %20
+                                let proccesed_max = values[1].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
+
+                                if (isNaN(parseFloat(proccesed_max[0]))) {
+                                    inputs[1].value = '';
+                                }
+                                else {
+                                    inputs[1].value = convertURLRangeValue(values[1], html_parameters[code]);;
+                                    inputs[1].disabled = false;
+                                }
+                            }
+                            else {
+                                inputs[1].value = '';
+                            }
+                        }
+                    }
+                    else {
+                        // console.log('THIS IS THE MOMENT: ', code_and_vals)
+                        let code = code_and_vals[0];
+                        let value = code_and_vals[1];
+
+                        if (code.toLowerCase() == 'actual') {
+                            actualIncluded = true;
+                        }
+
+                        let substr = code.toLowerCase().substring(0, 3);
+
+                        if (substr === 'min' || substr === 'max') {
+                            code = code.substring(3);
+
+                            let range_input = $(code + '_' + substr);
+
+                            if (range_input.length !== 0) {
+                                range_input.value = value;
+                                range_input.disabled = false;
+                            }
+                        }
+                        else {
+                            let inputs = $('#filter_' + code).find('.inp_label');
+
+                            for (let j = 0; j < inputs.length; j++) {
+                                if (inputs[j].value === value) {
+                                    // console.log('HERE I AM')
+                                    inputs[j].checked = true;
+                                    inputs[j].disabled = false;
+                                    break;
+                                }
+                            }
+
+                            // console.log('Code: ', code, '\tValue: ', value);
+
+                            if (code.toLowerCase() == 'name') {
+                                let input_field = document.querySelector('#element_search_bar');
+                                input_field.value = value;
+                                input_field.disabled = true;
+                                document.querySelector('.search_lupe').setAttribute('data-search', '1');
+                            }
+                        }
+                    }
+                }
+
+                if (actualIncluded == false) {
+                    $("input:radio")[2].checked = true;
+                }
+                document.documentElement.scrollTop = 0;
+            }
+        });
+    } else {
+        $("input:radio")[2].checked = true;
+        fetch('/catget')
+        .then(res => res.json())
+        .then(data => {
+            cachedData = data[0];
+            updatePaginator($, cachedData.length);
+            displayElements(data[0].slice(0,20));
+
+
+            html_parameters = data[1];
+            changeValuesState(html_parameters);
+            document.documentElement.scrollTop = 0;
+        });
+    }
+}
+
+
 $(function () {
+	console.log('starting state:', window.history.state);
+	
 	let preloader = $('<div></div>');
 	preloader.addClass('preloader');
 	preloader.insertBefore($('.main_content'));
 
-
-	$("#load_items").css({'width': ($("#table_elements").width() + 'px')});
-	console.log('window location:', window.location)
-	let url_search = window.location.search;
-	console.log('url_search: ', url_search)
-	console.log('decode:     ', decodeURIComponent(url_search))
-	if (url_search != '') {
-		console.log('This is url_search: ', url_search)
-		console.log('/catget' + url_search)
-		fetch('/catget' + url_search)
-		.then(res => res.json())
-		.then(data => {
-			cachedData = data[0];
-			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,10));
-
-			html_parameters = data[1];
-
-			$("#load_items").css({
-	        	'width': ($("#table_elements").width() + 'px')
-			});
-
-			// разделяем каждый фильтр в адресной строке
-			let query_values = decodeURIComponent(window.location.search.substring(1)).split('&');
-
-			console.log('\nQUERY DESTRUCTURING:\n')
-			console.log(query_values);
-
-			if (query_values.length === 0) {
-				console.log('\n\nНе думал, что этот вывод может произойти\n')
-			}
-			else {
-				// Нужно будет отдельно обработать значение для search из URL
-
-				for (let i = 0; i < query_values.length; i++) {
-					console.log(query_values[i]);
-					console.log(query_values[i].split('='));
-					let code_and_vals = query_values[i].split('=');
-					
-					if (code_and_vals[0] === 'filter') {
-						code_and_vals = code_and_vals[1].split(':');
-						let code = code_and_vals[0];
-						let value = code_and_vals[1];
-
-						if (code_and_vals[0].substring(0, 1) === 'i') {
-							let values = code_and_vals[1].split(',');
-							console.log('Code: ', code, '\tValues: ', values);
-							console.log(values);
-
-							let inputs = $('#filter_' + code).find('.inp_label');
-
-							for (let j = 0; j < inputs.length; j++) {
-								console.log('\nVALUES: ', values);
-								if (values.length === 0) {
-									break;
-								}
-
-								for (let k = 0; k < values.length; k++) {
-									if (inputs[j].value === values[k]) {
-										inputs[j].checked = true;
-										values.splice(k, 1);
-										break;
-									}
-								}
-							}
-						}
-						else {
-							let values = code_and_vals[1].split('~');
-							// console.log('Code: ', code, '\tValues: ', values);
-							// console.log(values);
-							// console.log('here' + code);
-							// console.log(document.getElementById('filter_' + code));
-							// console.log('warning\n:', $('#filter_' + code))
-							
-							let first_letter = code.substring(0, 1);
-							let inputs = $('#filter_' + code).find('.num_inp');
-							let inclusion_input = $('#filter_' + code).find('incl_inp');
-
-							if (first_letter === 'r') {
-								// иногда коды r[id] конвертируются в o[id] и наоборот
-								// лучше посмотреть сообщение по проекту в вк за 20 августа
-								inputs = inputs.length ? inputs : $('#filter_' + code.replace('r', 'o')).find('.num_inp');
-
-								if (inclusion_input.length !== 0) {
-									inclusion_input.checked = false;
-								}
-							}
-							else if (first_letter === 'o') {
-								inputs = inputs.length ? inputs : $('#filter_' + code.replace('o', 'r')).find('.num_inp');
-
-								if (inclusion_input.length !== 0) {
-									inclusion_input.checked = true;
-									inclusion_input.disabled = false;
-								}
-							}
-
-							if (inputs.length === 0) {
-								break;
-							}
-
-							// если запрос для текущего параметра
-							// корретный, то убирает disabled с полей ввода
-
-							if (values[0] != "") {
-								// следующая строка лишняя, в url пробелы заменяются на %20
-								let proccesed_min = values[0].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
-
-								if (isNaN(parseFloat(proccesed_min[0]))) {
-									inputs[0].value = '';
-								}
-								else {
-									inputs[0].value = URLValueToInput(values[0], html_parameters[code]);
-									inputs[0].disabled = false;
-								}
-							}
-							else {
-								inputs[0].value = '';
-							}
+	URLValuesToInput();
 
 
-							if (values[1] != "") {
-								// следующая строка лишняя, в url пробелы заменяются на %20
-								let proccesed_max = values[1].trim().replace(/\s+/g, ' ').replace(',', '.').split(' ');
-
-								if (isNaN(parseFloat(proccesed_max[0]))) {
-									inputs[1].value = '';
-								}
-								else {
-									inputs[1].value = URLValueToInput(values[1], html_parameters[code]);;
-									inputs[1].disabled = false;
-								}
-							}
-							else {
-								inputs[1].value = '';
-							}
-						}
-					}
-					else {
-						let code = code_and_vals[0];
-						let value = code_and_vals[1];
-						let substr = code.toLowerCase().substring(0, 3);
-
-						if (substr === 'min' || substr === 'max') {
-							code = code.substring(3);
-
-							let range_input = $(code + '_' + substr);
-
-							if (range_input.length !== 0) {
-								range_input.value = value;
-								range_input.disabled = false;
-							}
-						}
-						else {
-							let inputs = $('#filter_' + code).find('.inp_label');
-
-							for (let j = 0; j < inputs.length; j++) {
-								if (inputs[j].value === value) {
-									console.log('HERE I AM')
-									inputs[j].checked = true;
-									inputs[j].disabled = false;
-									break;
-								}
-							}
-
-							console.log('Code: ', code, '\tValue: ', value);
-
-							if (code.toLowerCase() == 'name') {
-								let input_field = document.querySelector('#element_search_bar');
-								input_field.value = value;
-								input_field.disabled = true;
-								document.querySelector('.search_lupe').setAttribute('data-search', '1');
-							}
-							/*for (let j = 0; j < code_and_vals.length; j++) {
-							console.log(code_and_vals[j][1])
-							}*/
-						}
-					}
-				}
-			}
-
-			// в этом случае не нужно вызывать changeValuesState(html_parameters),
-			// так как при переходе на страницу создается новый html,
-			// в котором все значения в фильтрах отображаются правильно
-			
-
-			// console.log('this is the data:\n', data[0])
-			// console.log('these are the html_parameters:\n', html_parameters)
-		});
-	} else {
-		 // var time = performance.now();
-		 // console.log('START')
-		fetch('/catget')
-		.then(res => res.json())
-		.then(data => {
-			// console.log('START display')
-			// var time1 = performance.now();
-
-			cachedData = data[0];
-			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,10));
-
-			// var time2 = performance.now() - time1;
-			// console.log('FINISH display: ', time2);
+	// $(window).on('hashchange', function (event) {
+	// 	event.preventDefault();
+	// 	console.log('HASHCHANGE this is the last url:', window.history.state);
+	// });
 
 
-			html_parameters = data[1];
-			$("#load_items").css({
-	        	'width': ($("#table_elements").width() + 'px')
-			});
-			// в этом случае не нужно вызывать changeValuesState(html_parameters),
-			// так как при переходе на страницу создается новый html,
-			// в котором все значения в фильтрах отображаются правильно
+    $(window).on('popstate', function () {
+		resetFilterValues();
+        URLValuesToInput();
+
+        let str = window.location.href;
+        // if(event.state === null) {
+
+        //    event.preventDefault();
+        //    return false;
+        // }
+    });
 
 
-			// console.log('this is the data:\n', data[0])
-			// console.log('these are the html_parameters:\n', html_parameters)
-
-			 // time = performance.now() - time;
-			 // console.log('FINISH:', time);
-		});
-	}
-
-
-
-
-    $(window).resize(function() {
-		$("#load_items").css({
-        	'width': ($("#table_elements").width() + 'px')
-		});
-	});
-	
-	
-	document.getElementById("table_body").innerHTML = "";
 	$('.back_to_top').on('click', function () {
 		$('#sticky_div').css('top', 0);
 		$('html, body').animate({scrollTop:0}, 'fast');
-	})
+	});
 
 
 	$(window).on('scroll', function () {
-		var scroll = $(window).scrollTop();	
+		var scroll = $(window).scrollTop();
 		var btt = $('.back_to_top');
 		btt.stop(true, true);
 
 		if (scroll > 0) { btt.show(); }
 
-		if ($('html, body').is(':animated')) { 
+		if ($('html, body').is(':animated')) {
 			if (scroll == 0) { btt.fadeOut(400); }
-			return; 
+			return;
 		}
         let table = $('#table_elements');
         let head = $('#sticky_table').height();
@@ -899,80 +906,46 @@ $(function () {
 	});
 
 
-
-	$('#load_items').on('click', function() {
-		$(this).css('display', 'none');
-		filterPreloader();
-		fetch('/catget')
-		.then(res => res.json())
-		.then(data => {
-			cachedData = data[0];
-			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,10));
-
-			html_parameters = data[1];
-
-			$(this).css({
-				'width': ($("#table_elements").width() + 'px')
-			});
-		})
-	});
-
-
-
 	$('#stat_show_button').on('click', function (e) {
 		filterPreloader();
 		e.preventDefault();
-		
+
 		let getText = composeURL();
 
 		$('#show_box').css('display', 'none');
 
 		if (getText == '') {
-			window.history.pushState(null, null, window.location.pathname);
+			window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname);
 		}
 		else {
-			window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(getText).replaceAll('%26', '&').replaceAll('%3D', '='));
+			window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname + '?' + encodeURIComponent(getText).replaceAll('%26', '&').replaceAll('%3D', '='));
 		}
 
 		document.getElementById("table_body").innerHTML = "";
-		console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
+		// console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
 
 		let url_search = window.location.search;
-		console.log('url:    ', url_search);
 		if (url_search != '') {
-			console.log('here: ', url_search);
 			fetch('/catget' + url_search)
 			.then(res => res.json())
 			.then(data => {
 				cachedData = data[0];
 				updatePaginator($, cachedData.length);
-				displayElements(data[0].slice(0,10));
+				displayElements(data[0].slice(0,20));
 
 				html_parameters = data[1];
-				console.log('\nhtml_parameters:\n', html_parameters)
 				changeValuesState(html_parameters);
-
-				$("#load_items").css({
-					'width': ($("#table_elements").width() + 'px')
-				});
 			});
 		} else {
-			console.log('here:');
 			fetch('/catget')
 			.then(res => res.json())
 			.then(data => {
 				cachedData = data[0];
 				updatePaginator($, cachedData.length);
-				displayElements(data[0].slice(0,10));
+				displayElements(data[0].slice(0,20));
 
 				html_parameters = data[1];
-				console.log('\nhtml_parameters:\n', html_parameters)
 				changeValuesState(html_parameters);
-
-				$("#load_items").css({
-					'width': ($("#table_elements").width() + 'px')
-				});
 			});
 		}
 	});
@@ -983,8 +956,10 @@ $(function () {
 	});
 
 
-
 	$('#element_search_bar').on('keydown', function() {
+		if (event.key == '%') {
+			return false;
+		}
 		if (event.key === "Enter") {
 			$('.search_lupe').trigger('click');
 		}
@@ -997,7 +972,6 @@ $(function () {
 		let input_field = document.querySelector('#element_search_bar');
 		if (elem.getAttribute('data-search') == '1') {
 			elem.setAttribute('data-search', '0');
-			console.log(input_field.value);
 
 			let val = input_field.value;
 			input_field.value = '';
@@ -1008,16 +982,14 @@ $(function () {
 			if (url_search.lastIndexOf('&name=') !== -1) {
 				let ind = url_search.lastIndexOf('&name=');
 				url_search = url_search.slice(0, ind);
-				console.log('sliced:', url_search);
-				window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
+				window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
 			} else {
 				let ind = url_search.lastIndexOf('name=');
 				url_search = url_search.slice(0, ind);
-				console.log('sliced:', url_search);
-				window.history.pushState(null, null, window.location.pathname);
+				window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname);
 			}
 
-			
+
 		}
 		else {
 			let val = input_field.value;
@@ -1026,18 +998,16 @@ $(function () {
 				input_field.value = val;
 				elem.setAttribute('data-search', '1');
 				input_field.disabled = true;
-				console.log(val);
 
 				url_search = window.location.search.slice(1);
-				console.log('lupe, url_search: ', url_search);
 
 				if (url_search !== '') {
 					url_search += '&name=' + val;
-					window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
+					window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
 				}
 				else {
 					url_search += 'name=' + val;
-					window.history.pushState(null, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
+					window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname + '?' + encodeURIComponent(url_search).replaceAll('%26', '&').replaceAll('%3D', '='));
 				}
 			}
 		}
@@ -1049,7 +1019,7 @@ $(function () {
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,10));
+			displayElements(data[0].slice(0,20));
 
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
@@ -1057,9 +1027,7 @@ $(function () {
 	});
 
 
-
 	$('.inp_label[type=radio]').on('change', function () {
-		// console.log('click')
 		let elem = $(this);
 		if (elem.get(0).value == 'none') {
 			countClicked--;
@@ -1067,7 +1035,6 @@ $(function () {
 		else {
 			countClicked++;
 		}
-		// console.log("countClicked: ", countClicked)
 		let position;
 		let filt_no = elem.closest('div').attr('id').slice(7);
 		$('#show_box').css('display', 'block');
@@ -1076,7 +1043,6 @@ $(function () {
 
 
 	$('.inp_label[type=checkbox]').on('change', function () {
-		// console.log('click')
 		let elem = $(this);
 		let position;
 		let filt_no = elem.closest('div').attr('id').slice(7);
@@ -1090,122 +1056,27 @@ $(function () {
 			countClicked--;
 			elem.parent().removeClass('filt_label_checked');
 		}
-		// console.log("countClicked: ", countClicked)
 	});
 
-
-
-	$('#search_form span').on('click', function(event) {
-		if (searchClicked == true) {			
-			document.getElementById("table_body").innerHTML = "";
-			displayFiltered(filtered);
-		}
-		searchClicked = false;
-		$('#element_search_bar')[0].value = "";
-		document.getElementById("element_search_bar").disabled = false;
-	});
-
-
-
-	$('#search_form').on('submit', function(event) {
-		event.preventDefault();
-		$('#element_search').trigger('click');
-	});
-
-
-	$('#element_search').on('click', function () {	
-		$('#element_search_bar')[0].value = $('#element_search_bar')[0].value.toLowerCase().trim();
-		var search_value = $('#element_search_bar')[0].value.toLowerCase().trim();
-		if (search_value) {
-			document.getElementById("element_search_bar").disabled = true;
-
-		}
-		// if (search_value) {
-		// 	searchClicked = true;
-		// 	document.getElementById("element_search_bar").disabled = true;
-		// 	document.getElementById("table_body").innerHTML = "";		
-			
-		// 	for (var i = 0; i < filtered.length; i++) {
-		// 		var comparing = filtered[i].name.toString().toLowerCase();
-			
-		// 		if (!comparing.includes(search_value)) {
-		// 			continue;
-		// 		}
-		// 		else {
-		// 			countSearched++;
-		// 			searched.push(filtered[i]);
-		// 		}
-		// 	}
-		// 	displayFiltered(searched);
-			
-		// }
-	});
 
 	$('#reset_button').on('click', function () {
-		filterPreloader();
-		let checked_boxes = $("input:checkbox:checked");
-		let input_boxes = $("input[type=text]");
-		let warnboxes = $('.warn_box');
-		let warninps = $('.warn_inp');
-		let search_input = $('#element_search_bar');
-
-		searchClicked = false; // redundant
-
-		document.getElementById("table_body").innerHTML = "";
-		
-		$('#element_search_bar')[0].value = "";
-		document.getElementById("element_search_bar").disabled = false;
-
-		$('#show_box').css('display', 'none');
-
-		for (let i = 0; i < checked_boxes.length; i++) {
-			checked_boxes[i].checked = false;
-			checked_boxes[i].closest('label').classList.remove('filt_label_checked');
-		}
-
-
-		for (let i = 0; i < input_boxes.length; i++) {
-			input_boxes[i].value = "";
-		}
-
-
-		for (let i = 0; i < warnboxes.length; i++) {
-			warnboxes.eq(i).stop(true, true).hide(); 
-		}
-
-
-		for (let i = 0; i < warninps.length; i++) {
-			warninps.eq(i).removeClass('warn_inp');
-		}
-
-		search_input.prop('disabled', false);
-		document.querySelector('.search_lupe').setAttribute('data-search', '0');
+		resetFilterValues();
 
 		// ставим в url адрес без query string
-		window.history.pushState(null, null, window.location.pathname);		
-		
+		window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname);
+
 		// в этом случае всегда делаем get запрос с пустым query string
 		fetch('/catget')
 		.then(res => res.json())
 		.then(data => {
 			cachedData = data[0];
 			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,10));
+			displayElements(data[0].slice(0,20));
 
 			html_parameters = data[1];
 			changeValuesState(html_parameters);
-
-			$("#load_items").css({
-				'width': ($("#table_elements").width() + 'px')
-			});
 		});
-
-
-		$("input:radio")[2].checked = true;
-		console.log();
 	});
-
-
 
 
 	$('.filter_select > button').on('click', function () {
@@ -1214,28 +1085,24 @@ $(function () {
 		var filt_no = filt_select.attr('id').slice(7);
 		var inpmax = filt_select.find('.max')
 
-		// selected[filt_no] = [NaN, NaN];
 		filt_select.find('.min')[0].value = "";
 		inpmax[0].value = "";
 		inpmax.removeClass('warn_inp');
 
 		$('#show_box').css('display', 'block');
 		$('#show_box').css('top', $(this).offset().top - 5);
-		//elem.next().css('display', 'none');
-		elem.next().hide();	
+		elem.next().hide();
 	});
 
 
 	$('.num_inp').on('keypress', function(event) {
-		if (event.key == '%') {
+		if (['%', '~', ':', '&', '='].includes(event.key)) {
 			return false;
 		}
-		// event.preventDefault();
-		// console.log(event.keyCode)
 	});
 
 
-	$('.num_inp').on('input', function () {	
+	$('.num_inp').on('input', function () {
 		var elem = $(this)
 
 		if (elem.hasClass('min')) {
@@ -1245,17 +1112,16 @@ $(function () {
 			elem.removeClass('warn_inp');
 		}
 
-		elem.closest('.filter_select').find('.warn_box').hide();	
+		elem.closest('.filter_select').find('.warn_box').hide();
 		$('#show_box').css('top', $(this).offset().top - 8);
 		$('#show_box').css('display', 'block');
 	});
 
 
 	$('.num_inp').on('paste', function (event) {
-		//var prev_val = $(this)[0].value;
-		// var pasted_text = event.originalEvent.clipboardData.getData('text');
-		// pasted_text = pasted_text.replace(",", ".").replace("%", '');
-		// return pasted_text
+        event.preventDefault();
+        let pasted_text = event.originalEvent.clipboardData.getData('text');
+        this.value = pasted_text.replace(/[%~:&=]*/g, '')
 	});
 
 
