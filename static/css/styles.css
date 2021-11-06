@@ -27,6 +27,12 @@
     float: right;
 }
 
+.table_size {
+	min-height: calc(85vh - 20px);
+	min-width:  calc(90vw - 20px);
+	max-height: calc(85vh - 20px);
+	max-width:  calc(90vw - 20px);
+}
 
 #mainmenu .nav {
     float: left;
@@ -147,6 +153,7 @@ input[type="search" i] {
 
 
 body {
+	overflow-y: hidden;
     width: max-content;
     min-width: 100%;
     font-family: arial, helvetica,sans-serif;
@@ -554,12 +561,6 @@ table {
 	margin-right: 15px;
 }
 
-
-#table_elements thead {
-	visibility: hidden;
-}
-
-
 .range {
 	min-width: 100px;
 }
@@ -625,6 +626,7 @@ tbody tr:hover {
 
 
 #sticky_table {
+	display: none;
 	position: absolute;
 }
 

@@ -532,11 +532,12 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
         <script src="../../static/js/ajax.js"></script>
         <script src="../../static/js/script.js"></script>
         <script src="../../static/pagination/jquery.simplePagination.js"></script>
+        <script src="../../static/jqscrollbar/jquery.scrollbar.min.js"></script>
         <title>Проект АСОНИКА-К ЭКБ | {breadcrumbs[-1][0]}</title>
         <link rel="stylesheet" href="../../static/css/styles.css">
         <link rel="stylesheet" href="../../static/pagination/simplePagination.css">
+        <link rel="stylesheet" href="../../static/jqscrollbar/jquery.scrollbar.css">
       </head>
-
       <body>
         <header>
           <div id="up_header">
@@ -590,19 +591,13 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
           </div>
         </header>
 
-
-
         <div class="back_to_top">
           <img draggable="false" src="/static/images/red.svg" alt="" width="26">
           <a>Наверх</a>
         </div>
-
-
         <div id="warn_inp">
           Это значение должно быть больше, чем значение в верхнем поле
         </div>
-
-
         <div id="show_box">
           <div id="arr_show">
           </div>
@@ -610,21 +605,13 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
           <div id="show_box_close">
           </div>
         </div>
-
-
-
-
         <div class=main_content>
           <div id="inf_and_search">
             <div id="reset_box">
               <button id="reset_button" type="submit">Сбросить все фильтры</button>
             </div>
-
             <div id=number_of_displayed_elements></div>
-
           </div>
-
-
           <div>
             <div class="filters_and_elements">
 
@@ -711,10 +698,8 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
                   <button id="stat_show_button">Применить</button>
                 </div>
               </div> <!-- End of filters div -->  
-
-
-
               <div id="div_table">
+                <div class="scrollbar-inner table_size">
                 <div id="sticky_div">
                   <table id="sticky_table">
                     <thead>
@@ -758,14 +743,17 @@ def create_html(parameters, html_parameters, columns_width, fullnames, breadcrum
                   <tbody id="table_body">
                   </tbody>
                 </table>
+                </div>
                 <div class="compact-theme"></div>
               </div>
-
             </div> <!-- End of filters_and_elements div -->  
 
           </div>
         </div> <!-- End of main_content duv -->
 
+        <script>
+            jQuery(document).ready(function(){jQuery('.scrollbar-inner').scrollbar();});
+        </script>
       </body>
     </html>
     '''

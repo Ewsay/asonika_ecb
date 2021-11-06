@@ -562,15 +562,6 @@ const displayElements = function (data) {
 		message += '</tr>';
 	}
 
-	let ths = $('#sticky_table th');
-	for (let i = 0; i < ths.length; i++) {
-		if (ths[i].width < col_widths[i] + 22) {
-			// если ширина столбца догруженных данных меньше,
-			// чем текущая, то ее не меняем
-			ths[i].width = col_widths[i] + 22;
-		}
-	}
-
 	ths = $('#table_elements th');
 	for (let i = 0; i < ths.length; i++) {
 		if (ths[i].width < col_widths[i] + 22) {
