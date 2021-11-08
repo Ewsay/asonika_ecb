@@ -62,7 +62,7 @@ def get_tus(request, tu_id):
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
+    info = requests.get(f'https://localhost:5001/api/descr/Tus?id={tu_id}', data=request.GET, verify=False)
     return render(
             request,
             template_name,
