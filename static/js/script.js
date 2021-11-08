@@ -150,11 +150,7 @@ const composeURL = function() {
 					else if (code.slice(0, 1) === 'o') {
 						code = code.replace('o', 'r');
 					}
-					else {
-						console.log('\nReally weird thing happened');
-						continue;
-					}
-				} 
+				}
 				let par_name = html_parameters[code]["Short"];
 				let default_unit = par_name.substring(par_name.indexOf('[') + 1, par_name.indexOf(']'));
 				let cur_units = html_parameters[code]["Units"];
@@ -497,7 +493,7 @@ String.prototype.width = function() {
 
 const displayElements = function (data) {
 //	console.log('START display')
-	let time = performance.now();
+	// let time = performance.now();
 //	console.log('Data length: ' + data.length);
 	let col_widths = [];
 
@@ -653,16 +649,23 @@ let updatePaginator = function($, numb) {
 
 const URLValuesToInput = function() {
     let url_search = window.location.search;
-//    console.log('url_search: ', url_search)
-//    console.log('decode:     ', decodeURIComponent(url_search))
+	console.log('url_search: ', url_search)
+	console.log('decode:     ', decodeURIComponent(url_search))
+
+	console.log('START display')
+	let time = performance.now();
+	let path = window.location.pathname;
+	let ind = path.lastIndexOf('/'); 
+
     if (url_search != '') {
-        fetch('/catget' + url_search)
+    	fetch('/catget' + `?cat_id=${path.slice(ind)}&` + url_search)
         .then(res => res.json())
         .then(data => {
             cachedData = data[0];
             updatePaginator($, cachedData.length);
             displayElements(data[0].slice(0,20));
-
+            time = performance.now() - time;
+			console.log('FINISH:', time);
             html_parameters = data[1];
             changeValuesState(html_parameters);
 
@@ -833,10 +836,19 @@ const URLValuesToInput = function() {
             }
         });
     } else {
+    	console.log('I AM HERE')
+    	console.log("This is the HREF BEFORE FETCH:", window.location.href);
         $("input:radio")[2].checked = true;
-        fetch('/catget')
+        console.log('START display')
+		let time = performance.now();
+
+		let path = window.location.pathname;
+		let ind = path.lastIndexOf('/'); 
+        fetch('/catget'+ `?cat_id=${path.slice(ind)}`)
         .then(res => res.json())
         .then(data => {
+        	console.log('THIS IS THE DATA:\n', data);
+        	console.log("This is the HREF AFTER FETCH:", window.location.href);
             cachedData = data[0];
             updatePaginator($, cachedData.length);
             displayElements(data[0].slice(0,20));
@@ -845,6 +857,8 @@ const URLValuesToInput = function() {
             html_parameters = data[1];
             changeValuesState(html_parameters);
             document.documentElement.scrollTop = 0;
+            time = performance.now() - time;
+			console.log('FINISH:', time);
         });
     }
 }
@@ -866,6 +880,7 @@ $(function () {
 	// });
 
     $(window).on('popstate', function () {
+    	console.log('IN THE POPSTATE');
 		resetFilterValues();
         URLValuesToInput();
     });
@@ -929,8 +944,11 @@ $(function () {
 		// console.log('encode: ', '?' + encodeURIComponent(getText).replaceAll('%26', '&'));
 
 		let url_search = window.location.search;
-		if (url_search != '') {
-			fetch('/catget' + url_search)
+		
+		let path = window.location.pathname;
+		let ind = path.lastIndexOf('/'); 
+        if (url_search != '') {
+			fetch('/catget' + `?cat_id=${path.slice(ind)}&` + url_search)
 			.then(res => res.json())
 			.then(data => {
 				cachedData = data[0];
@@ -941,7 +959,7 @@ $(function () {
 				changeValuesState(html_parameters);
 			});
 		} else {
-			fetch('/catget')
+			fetch('/catget' + `?cat_id=${path.slice(ind)}`)
 			.then(res => res.json())
 			.then(data => {
 				cachedData = data[0];
@@ -1017,17 +1035,32 @@ $(function () {
 		}
 		filterPreloader();
 		if (url_search !== '') { url_search = '?' + url_search; }
+		let path = window.location.pathname;
+		let ind = path.lastIndexOf('/'); 
+		// первый блок if может быть лишним
+		if (url_search === '?') {
+			fetch('/catget' + `?cat_id=${path.slice(ind)}` + url_search)
+			.then(res => res.json())
+			.then(data => {
+				cachedData = data[0];
+				updatePaginator($, cachedData.length);
+				displayElements(data[0].slice(0,20));
 
-		fetch('/catget' + url_search)
-		.then(res => res.json())
-		.then(data => {
-			cachedData = data[0];
-			updatePaginator($, cachedData.length);
-			displayElements(data[0].slice(0,20));
+				html_parameters = data[1];
+				changeValuesState(html_parameters);
+			});
+		} else {
+			fetch('/catget' + `?cat_id=${path.slice(ind)}&` + url_search)
+			.then(res => res.json())
+			.then(data => {
+				cachedData = data[0];
+				updatePaginator($, cachedData.length);
+				displayElements(data[0].slice(0,20));
 
-			html_parameters = data[1];
-			changeValuesState(html_parameters);
-		});
+				html_parameters = data[1];
+				changeValuesState(html_parameters);
+			});
+		}
 	});
 
 
@@ -1065,12 +1098,13 @@ $(function () {
 
 	$('#reset_button').on('click', function () {
 		resetFilterValues();
-
+		let path = window.location.pathname;
+		let ind = path.lastIndexOf('/'); 		
 		// ставим в url адрес без query string
 		window.history.pushState({ prevUrl: window.location.href }, null, window.location.pathname);
 
 		// в этом случае всегда делаем get запрос с пустым query string
-		fetch('/catget')
+		fetch('/catget' + `?cat_id=${path.slice(ind)}`)
 		.then(res => res.json())
 		.then(data => {
 			cachedData = data[0];

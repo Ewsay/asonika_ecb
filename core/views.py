@@ -36,11 +36,12 @@ from django.urls import resolve
 
 
 def get_info(request, column_id, parameter_id):
+    headers = {'Content-Type': 'application/json'}
     template_name = 'core/info.html'
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = requests.get(f'https://localhost:5001/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', data=request.GET, verify=False)
+    info = requests.get(f'https://localhost:5000/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', headers=headers, data=request.GET, verify=False)
     return render(
             request,
             template_name,
@@ -50,19 +51,20 @@ def get_info(request, column_id, parameter_id):
         )
 
 def get_mnfs(request, mnf_id):
+    headers = {'Content-Type': 'application/json'}
     template_name = 'core/mnfs.html'
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = requests.get(f'https://localhost:5001/api/descr/Mnfs?id={mnf_id}', data=request.GET, verify=False)
-    return redirect(f'https://localhost:5001/api/company/{mnf_id}')
+    info = requests.get(f'https://localhost:5000/api/descr/Mnfs?id={mnf_id}',headers=headers, data=request.GET, verify=False)
+    return redirect(f'https://localhost:5000/api/company/{mnf_id}')
 
 def get_tus(request, tu_id):
     template_name = 'core/tus.html'
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = requests.get(f'https://localhost:5001/api/descr/Tus?id={tu_id}', data=request.GET, verify=False)
+    info = requests.get(f'https://localhost:5000/api/descr/Tus?id={tu_id}', data=request.GET, verify=False)
     return render(
             request,
             template_name,
@@ -120,6 +122,7 @@ def get_category_data(request):
 
 
 def get_category(request, category_id):
+    print('GET_CATEGORY !!!!!!!!!!!!!, cat_id:', category_id)
     os.chdir(os.path.dirname(__file__))
     os.chdir('../static')
 
