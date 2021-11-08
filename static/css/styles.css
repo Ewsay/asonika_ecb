@@ -9,6 +9,13 @@
 }
 
 
+span.divider {
+    position: relative;
+    bottom: 2px;
+    right: 1px;
+}
+
+
 .center_wrap {
     width: 100%;
     margin: auto;
@@ -551,12 +558,12 @@ table {
 	min-width: calc(100vw - 350px);
 	table-layout: fixed;
 	border-spacing: 0;
-	border-top: 2px solid #5a5a5a;
+	/*border-top: 2px solid #5a5a5a;*/
 	text-align: left;
 }
 
 table td{
-	border: 1px solid #8f8f8f;
+	border: 1px solid #dfdfdf;
 }
 
 #table_elements {
@@ -609,9 +616,10 @@ td, th {
 }
 
 thead th { 
-	border: 1px solid #5a5a5a;
+	/*border: 1px solid #5a5a5a;*/
 	background: rgb(238, 238, 238);
 	z-index: 5;
+	border-left: 1px solid #dfdfdf;
 	position: sticky; 
 	top: 0; 
 }
