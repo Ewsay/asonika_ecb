@@ -638,7 +638,6 @@ let updatePaginator = function($, numb) {
 		itemsOnPage: perPage,
 		currentPage: retrievePageFromURL(),
 		cssStyle: "compact-theme",
-		hrefTextPrefix: '',
 		// This is the actual page changing functionality.
 		onPageClick: function(pageNumber) {
 			var showFrom = perPage * (pageNumber - 1);

@@ -40,7 +40,7 @@ def get_info(request, column_id, parameter_id):
     # parent_id = request.GET[]
     # item_id = request.GET[]
     # info = get_right_html(1, 1)
-    info = requests.get(f'https://localhost:5001/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', data=request.GET, verify=False)
+    info = requests.get(f'http://localhost:5000/api/descr/Parameter?column_id={column_id}&parameter_id={parameter_id}', data=request.GET, verify=False)
     return render(
             request,
             template_name,
@@ -56,18 +56,18 @@ def get_mnfs(request, mnf_id):
     # info = get_right_html(1, 1)
     return redirect(f'http://localhost:5000/api/company/{mnf_id}')
 
-def get_tus(request, tu_id):
-    template_name = 'core/tus.html'
-    # parent_id = request.GET[]
-    # item_id = request.GET[]
-    # info = get_right_html(1, 1)
-    return render(
-            request,
-            template_name,
-            {
-                'info': info.text
-            }
-        )
+# def get_tus(request, tu_id):
+#     template_name = 'core/tus.html'
+#     # parent_id = request.GET[]
+#     # item_id = request.GET[]
+#     # info = get_right_html(1, 1)
+#     return render(
+#             request,
+#             template_name,
+#             {
+#                 'info': info.text
+#             }
+#         )
 
 def get_doc(request, tu_doc):
     path_to_file = os.path.abspath(os.path.dirname(__file__)) + '/docs/' + tu_doc
